@@ -9,6 +9,8 @@ const Home = () =>  {
       <BaseLayout>
         <Container>
           <Button color="danger">Danger</Button>
+          
+        
         </Container>
       </BaseLayout>
     </div>
