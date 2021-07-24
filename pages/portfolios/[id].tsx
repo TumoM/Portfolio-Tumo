@@ -3,6 +3,8 @@ import axios from "axios";
 import BaseLayout from "components/layouts/BaseLayout"
 import { NextPageContext } from "next";
 import { useRouter } from "next/router"
+import BasePage from 'components/BasePage'
+
 
 interface Portfolio {
   body: string;
@@ -20,9 +22,11 @@ const PortfolioDetail = ({portfolio} : {portfolio: Portfolio}):JSX.Element => {
 
     return (
         <BaseLayout>
+          <BasePage>
             <h1>{portfolio.title}</h1>
             <p>BODY: {portfolio.body}</p>
             <p>ID: {portfolio.id}</p>
+          </BasePage>
         </BaseLayout>
     )
 }

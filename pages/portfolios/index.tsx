@@ -3,6 +3,8 @@ import BaseLayout from 'components/layouts/BaseLayout'
 import { NextPage, NextPageContext  } from 'next'
 import React, { useEffect } from "react"
 import Link from "next/link"
+import BasePage from 'components/BasePage'
+
 
 interface Props {
   userAgent?: string;
@@ -32,10 +34,12 @@ const Portfolios = ({posts}:any) =>  {
 
   return (
     <BaseLayout>
-      <h1>I am Portfolios page</h1>
-      <ul>
-        {renderPosts()}
-      </ul>
+      <BasePage>
+        <h1>I am Portfolios page</h1>
+        <ul>
+          {renderPosts()}
+        </ul>
+      </BasePage>
     </BaseLayout>
   )
 }

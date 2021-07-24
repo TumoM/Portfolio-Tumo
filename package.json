@@ -4,7 +4,7 @@
   "private": true,
   "proxy": "http://localhost:3001",
   "scripts": {
-    "dev": "node server/server.js",
+    "dev": "nodemon server/server.js",
     "dev:debug": "set NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "$env:NODE_ENV=production node server.server.js",
@@ -16,6 +16,7 @@
     "next": "11.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-typed": "^1.2.0",
     "reactstrap": "^8.9.0",
     "sass": "^1.36.0"
   },
@@ -23,6 +24,7 @@
     "@types/react": "17.0.14",
     "eslint": "7.31.0",
     "eslint-config-next": "11.0.1",
+    "nodemon": "^2.0.12",
     "typescript": "4.3.5"
   }
 }
