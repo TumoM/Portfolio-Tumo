@@ -1,0 +1,60 @@
+import axios from 'axios'
+import BaseLayout from 'components/layouts/BaseLayout'
+import { NextPage, NextPageContext  } from 'next'
+import React, { useEffect } from "react"
+import Link from "next/link"
+
+interface Props {
+  userAgent?: string;
+}
+
+const Portfolios = ({posts}:any) =>  {
+
+  useEffect(() => {
+    console.log("Posts Changes:",posts);
+    
+  },[posts])
+
+  const renderPosts = () => {
+    if (posts){
+      return posts.map((post:any) => {
+        return <li key={post?.id}>
+          <Link href={`/portfolios/${post?.id}`}>
+            <a>
+              {post?.title}
+            </a>
+          </Link>
+          </li>
+      })
+    }
+    
+  }
+
+  return (
+    <BaseLayout>
+      <h1>I am Portfolios page</h1>
+      <ul>
+        {renderPosts()}
+      </ul>
+    </BaseLayout>
+  )
+}
+
+Portfolios.getInitialProps = async (ctx:NextPageContext ) => {
+  console.log("In initial state");
+  let posts = [];
+
+  try {
+    const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
+    posts = response.data
+    console.log("Response:",response);
+  }
+  catch(e) {
+    console.log(e);
+    
+  }
+
+  return {posts:posts.slice(0,10)};
+}
+
+export default Portfolios
