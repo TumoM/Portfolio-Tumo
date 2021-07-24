@@ -2,16 +2,18 @@
   "name": "portfolio-tumo",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001",
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server/server.js",
     "build": "next build",
-    "start": "next start",
+    "start": "$env:NODE_ENV=production node server.server.js",
     "lint": "next lint"
   },
   "dependencies": {
     "next": "11.0.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "sass": "^1.36.0"
   },
   "devDependencies": {
     "@types/react": "17.0.14",
