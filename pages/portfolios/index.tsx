@@ -4,7 +4,7 @@ import { NextPage, NextPageContext  } from 'next';
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import BasePage from 'components/BasePage';
-import { useGetPosts } from 'helpers';
+import { useGetData } from 'helpers';
 import { Spinner } from 'reactstrap';
 interface Props {
   userAgent?: string;
@@ -12,7 +12,7 @@ interface Props {
 
 
 const Portfolios = () =>  {
-  const  { posts, error, loading} = useGetPosts();
+  const  { data, error, loading} = useGetData('/api/v1/posts');
   
   const renderPosts = (posts) => {
     if (posts){
@@ -38,10 +38,10 @@ const Portfolios = () =>  {
             <p >Loading Data...</p> 
           </>
         }
-        {posts && 
+        {data && 
           <ul>
           {
-            renderPosts(posts)
+            renderPosts(data)
           }
           </ul>
         }

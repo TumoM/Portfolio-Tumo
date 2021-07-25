@@ -4,6 +4,9 @@ import BaseLayout from "components/layouts/BaseLayout"
 import { NextPageContext } from "next";
 import { useRouter } from "next/router"
 import BasePage from 'components/BasePage'
+import { useGetData } from "helpers";
+import React from "react";
+import { Spinner } from "reactstrap";
 
 
 interface Portfolio {
@@ -17,35 +20,32 @@ interface Query {
 }
 
 
-const PortfolioDetail = ({portfolio} : {portfolio: Portfolio}):JSX.Element => {
-    const router = useRouter();
+const PortfolioDetail = ():JSX.Element => {
+  const router = useRouter();
+  const  { data, error, loading} = useGetData(router?.query?.id? '/api/v1/posts/'+router?.query?.id : null);
 
     return (
         <BaseLayout>
           <BasePage>
-            <h1>{portfolio.title}</h1>
-            <p>BODY: {portfolio.body}</p>
-            <p>ID: {portfolio.id}</p>
+          { loading &&
+            <>
+              <Spinner color="primary" size="xl" />
+              <p >Loading Data...</p> 
+            </>
+          }
+          {data && 
+            <>
+              <h1>{data.title}</h1>
+              <p>BODY: {data.body}</p>
+              <p>ID: {data.id}</p>
+            </>
+          }
+          { error &&
+          <div className="alert alert-danger"><h5>{error?.message}</h5></div>
+          }
           </BasePage>
         </BaseLayout>
     )
 }
 
-PortfolioDetail.getInitialProps = async ({query}:{query:Query}): Promise<object> => {
-    console.log("In initial state");
-    let post = {};
-  
-    try {
-      const response = await axios.get('https://jsonplaceholder.typicode.com/posts/'+query?.id)
-      post = response.data
-      console.log("Response:",response);
-      console.log("Post:",post);
-    }
-    catch(e) {
-      console.log(e);
-      
-    }
-  
-    return {portfolio:post};
-  }
 export default PortfolioDetail

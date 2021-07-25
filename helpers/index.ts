@@ -1,21 +1,21 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-interface ReturnGetPosts {
-  posts?: object[];
+interface ReturnGetData {
+  data?: any;
   error?: any;
   loading: boolean
 }
-export const useGetPosts = ():ReturnGetPosts => {
-    const [posts, setPosts] = useState([]);
+export const useGetData = (url:string):ReturnGetData => {
+    const [data, setData] = useState();
     const [error, setError] = useState();
     const [loading, setLoading] = useState(true);
     // Fetches post on ComponentDidMount
     useEffect(() => {
   
-      (async () => {
+      url && (async () => {
         try {
-          const axiosRes = await axios.get('/api/v1/posts')
+          const axiosRes = await axios.get(url)
           console.log("Status:",axiosRes?.status);
 
           if (axiosRes?.status !== 200){
@@ -25,17 +25,23 @@ export const useGetPosts = ():ReturnGetPosts => {
           } 
           else {
             let result = axiosRes.data
-            setPosts(result)
+            setData(result)
           }  
           setLoading(false)  
         }
         catch(e) {
-          setError(e.toJSON())
+          // debugger
+          try{
+            setError(e.toJSON())
+          }
+          catch(e2) {
+            debugger
+            setError(e)
+          }
           setLoading(false)  
-          console.log(e.toJSON());
           
         }
       })()
-    },[])
-    return {posts, error, loading}
+    },[url])
+    return {data, error, loading}
   }
