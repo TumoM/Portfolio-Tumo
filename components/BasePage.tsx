@@ -2,7 +2,7 @@ import React from "react"
 import { Container } from "reactstrap"
 
 interface PostProps {
-    children: JSX.Element[] | JSX.Element;
+    children: JSX.Element[] | JSX.Element | (string | Element)[];
     className?: string[] | string
   }
 
