@@ -33,7 +33,7 @@ const PortfolioDetail = ():JSX.Element => {
               <p >Loading Data...</p> 
             </>
           }
-          {data && 
+          {data && !loading &&
             <>
               <h1>{data.title}</h1>
               <p>BODY: {data.body}</p>

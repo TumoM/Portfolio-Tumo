@@ -24,7 +24,8 @@ const BsNavLink: React.FC<PostProps> = props => {
 }
 
 const LoginLink = () => {
-  return <span className="nav-link port-navbar-link clickable">Login</span>
+  // return <span className="nav-link port-navbar-link clickable">Login</span>
+  return <BsNavLink href="/api/auth/login"title="Login"/>
 }
 const LogoutLink = () => {
   return <span className="nav-link port-navbar-link clickable">Logout</span>
