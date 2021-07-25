@@ -8,6 +8,7 @@ import {
   Nav,
   NavItem
 } from 'reactstrap';
+import { useUser } from '@auth0/nextjs-auth0';
 
 interface PostProps {
   href: string;
@@ -28,11 +29,12 @@ const LoginLink = () => {
   return <BsNavLink href="/api/auth/login"title="Login"/>
 }
 const LogoutLink = () => {
-  return <span className="nav-link port-navbar-link clickable">Logout</span>
+  return <BsNavLink href="/api/auth/logout "title="Logout"/>
 }
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, error, isLoading } = useUser();
   const toggle = () => setIsOpen(!isOpen);
 
   return (
@@ -67,12 +69,25 @@ const Header = () => {
             </NavItem>
           </Nav>
           <Nav navbar>
-            <NavItem className="port-navbar-item">
-              <LoginLink/>
-            </NavItem>
-            <NavItem className="port-navbar-item">
-              <LogoutLink/>
-            </NavItem>
+            { !user &&
+              <>
+                <NavItem className="port-navbar-item">
+                  <LoginLink/>
+                </NavItem>
+              </>
+            }
+            {
+              user &&
+              <>
+                <NavItem className="port-navbar-item">
+                  <span className="nav-link port-navbar-link clickable">{user.given_name || user.name}</span>
+                </NavItem>
+                <NavItem className="port-navbar-item">
+                  <LogoutLink/>
+                </NavItem>
+              </>
+            }
+            
           </Nav>
         </Collapse>
       </Navbar>
