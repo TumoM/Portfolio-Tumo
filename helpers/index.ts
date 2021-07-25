@@ -1,47 +1,17 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import useSWR from 'swr'
 
-interface ReturnGetData {
-  data?: any;
-  error?: any;
-  loading: boolean
+const myFetcher = (url:string) => {
+  return axios.get(url).then(res=>res.data)
 }
-export const useGetData = (url:string):ReturnGetData => {
-    const [data, setData] = useState();
-    const [error, setError] = useState();
-    const [loading, setLoading] = useState(true);
-    // Fetches post on ComponentDidMount
-    useEffect(() => {
-  
-      url && (async () => {
-        try {
-          const axiosRes = await axios.get(url)
-          console.log("Status:",axiosRes?.status);
 
-          if (axiosRes?.status !== 200){
-              debugger
-              let result:any = axiosRes
-              setError(result)
-          } 
-          else {
-            let result = axiosRes.data
-            setData(result)
-          }  
-          setLoading(false)  
-        }
-        catch(e) {
-          // debugger
-          try{
-            setError(e.toJSON())
-          }
-          catch(e2) {
-            debugger
-            setError(e)
-          }
-          setLoading(false)  
-          
-        }
-      })()
-    },[url])
-    return {data, error, loading}
-  }
+export const useGetPosts = (url = "/api/v1/posts") => {
+ const { data, error, ...rest } = useSWR(url,myFetcher);
+  return {data, error, loading: !data && !error, ...rest}
+}
+
+export const useGetPostById = (id) => {
+ const { data, error, ...rest } = useSWR(id ? `/api/v1/posts/${id}` : null,myFetcher);
+  // Loading if there is no data and no error
+  return {data, error, loading: !data && !error, ...rest}
+}

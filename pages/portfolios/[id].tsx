@@ -4,7 +4,7 @@ import BaseLayout from "components/layouts/BaseLayout"
 import { NextPageContext } from "next";
 import { useRouter } from "next/router"
 import BasePage from 'components/BasePage'
-import { useGetData } from "helpers";
+import { useGetPostById } from "helpers";
 import React from "react";
 import { Spinner } from "reactstrap";
 
@@ -22,7 +22,7 @@ interface Query {
 
 const PortfolioDetail = ():JSX.Element => {
   const router = useRouter();
-  const  { data, error, loading} = useGetData(router?.query?.id? '/api/v1/posts/'+router?.query?.id : null);
+  const  { data, error, loading} = useGetPostById(router.query.id);
 
     return (
         <BaseLayout>

@@ -4,16 +4,17 @@ import { NextPage, NextPageContext  } from 'next';
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import BasePage from 'components/BasePage';
-import { useGetData } from 'helpers';
+import { useGetPosts } from 'helpers';
 import { Spinner } from 'reactstrap';
 interface Props {
   userAgent?: string;
 }
 
 
+
 const Portfolios = () =>  {
-  const  { data, error, loading} = useGetData('/api/v1/posts');
-  
+  const  { data, error, loading } = useGetPosts();
+
   const renderPosts = (posts) => {
     if (posts){
       return posts.map((post:any) => {
@@ -45,7 +46,7 @@ const Portfolios = () =>  {
           }
           </ul>
         }
-        { error &&
+        { error && !loading &&
           <div className="alert alert-danger"><h5>{error?.message}</h5></div>
         }
       </BasePage>
