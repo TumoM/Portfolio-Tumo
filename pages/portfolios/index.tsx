@@ -6,6 +6,8 @@ import Link from "next/link";
 import BasePage from 'components/BasePage';
 import { useGetPosts } from 'helpers';
 import { Spinner } from 'reactstrap';
+import { useUser } from '@auth0/nextjs-auth0';
+
 interface Props {
   userAgent?: string;
 }
@@ -14,6 +16,7 @@ interface Props {
 
 const Portfolios = () =>  {
   const  { data, error, loading } = useGetPosts();
+  const { user, error:errorLogin, isLoading } = useUser();
 
   const renderPosts = (posts) => {
     if (posts){
@@ -30,7 +33,7 @@ const Portfolios = () =>  {
   }
 
   return (
-    <BaseLayout>
+    <BaseLayout user={user} loading={isLoading}>
       <BasePage>
         <h1>I am Portfolios page</h1>
         { loading &&

@@ -7,6 +7,7 @@ import BasePage from 'components/BasePage'
 import { useGetPostById } from "helpers";
 import React from "react";
 import { Spinner } from "reactstrap";
+import { useUser } from '@auth0/nextjs-auth0';
 
 
 interface Portfolio {
@@ -23,9 +24,11 @@ interface Query {
 const PortfolioDetail = ():JSX.Element => {
   const router = useRouter();
   const  { data, error, loading} = useGetPostById(router.query.id);
+  const { user, error:errorLogin, isLoading } = useUser();
+
 
     return (
-        <BaseLayout>
+        <BaseLayout user={user} loading={isLoading}>
           <BasePage>
           { loading &&
             <>
