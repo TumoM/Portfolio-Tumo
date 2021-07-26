@@ -7,15 +7,17 @@
     "dev": "nodemon server/server.js",
     "dev:debug": "set NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
-    "start": "$env:NODE_ENV=production node server.server.js",
+    "start": "$env:NODE_ENV=production node server/server.js",
     "lint": "next lint"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^1.5.0",
     "axios": "^0.21.1",
     "bootstrap": "^4.4.1",
+    "dotenv": "^10.0.0",
     "dotenv-webpack": "^1.7.0",
     "express": "^4.17.1",
+    "mongoose": "^5.13.3",
     "next": "11.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
