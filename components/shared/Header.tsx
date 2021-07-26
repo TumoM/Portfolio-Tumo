@@ -73,7 +73,7 @@ const Header = ({user, loading}) => {
                 { user &&
                   <>
                     <NavItem className="port-navbar-item">
-                    <span className="nav-link port-navbar-link clickable">{user.given_name || user.name}</span>
+                      <BsNavLink href="/profile" title={user.given_name || user.name}/>
                     </NavItem>
                     <NavItem className="port-navbar-item">
                       <LogoutLink/>

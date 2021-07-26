@@ -7,7 +7,6 @@ import { useUser } from '@auth0/nextjs-auth0';
 
 const About = () =>  {
   const { user, error, isLoading } = useUser();
-
   return (
     <BaseLayout user={user} loading={isLoading}>
       <BasePage>
