@@ -1,55 +1,64 @@
 import axios from 'axios'
 import BaseLayout from 'components/layouts/BaseLayout';
-import { NextPage, NextPageContext  } from 'next';
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import BasePage from 'components/BasePage';
-import { useGetPosts } from 'helpers';
-import { Spinner } from 'reactstrap';
+import { Col, Row, Spinner } from 'reactstrap';
 import { useUser } from '@auth0/nextjs-auth0';
-
+import PortfolioApi from 'lib/api/portfolios';
+import PortfolioCard from "components/PortfolioCard";
+import MyLoading from 'components/shared/MyLoading';
 interface Props {
   userAgent?: string;
 }
 
 
 
-const Portfolios = () =>  {
-  const  { data, error, loading } = useGetPosts();
-  const { user, error:errorLogin, isLoading } = useUser();
-
-  const renderPosts = (posts) => {
-    if (posts){
-      return posts.map((post:any) => {
-        return <li key={post?.id}>
-          <Link href={`/portfolios/${post?.id}`}>
-            <a>
-              {post?.title}
-            </a>
-          </Link>
-          </li>
+const Portfolios = ({portfolios}) =>  {
+  const { user, error, isLoading } = useUser();
+  const router = useRouter()
+  
+  const renderPortfolios = (portfolios) => {
+    if (portfolios){
+      return portfolios.map((portfolio:any) => {
+        return (
+          <Col onClick={() => {
+              router.push(`/portfolios/[id]`,`/portfolios/${portfolio?._id}`)
+            }} 
+            key={portfolio?._id} ms="4" md="4">
+            {/* <Link href={`/portfolios/${portfolio?._id}`} passHref>
+            </Link> */}
+                <PortfolioCard  portfolio={portfolio}/>
+          </Col>
+          
+        ) 
+        
       })
     }
   }
 
+
   return (
-    <BaseLayout user={user} loading={isLoading}>
-      <BasePage>
-        <h1>I am Portfolios page</h1>
-        { loading &&
-          <>
-            <Spinner color="primary" size="xl" />
-            <p >Loading Data...</p> 
-          </>
+    <BaseLayout 
+      user={user} 
+      loading={isLoading}
+    >
+      <BasePage header="Portfolios" className="portfolio-page">
+        { isLoading &&
+          <div className="text-center">
+            <MyLoading size='3.5rem'/>
+          </div>
         }
-        {data && 
-          <ul>
-          {
-            renderPosts(data)
-          }
-          </ul>
+        {user && 
+          <Row>
+            {
+              renderPortfolios(portfolios)
+            }
+          </Row>
+          
         }
-        { error && !loading &&
+        { error && !isLoading &&
           <div className="alert alert-danger"><h5>{error?.message}</h5></div>
         }
       </BasePage>
@@ -57,21 +66,13 @@ const Portfolios = () =>  {
   )
 }
 
-Portfolios.getInitialProps = async (ctx:NextPageContext ) => {
-  console.log("In initial state");
-  let posts = [];
-
-  try {
-    const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
-    posts = response.data
-    // console.log("Response:",response);
+// Get portfolios data at build time
+export async function getStaticProps() {
+  const json = await new PortfolioApi().getAll();
+  const portfolios = json.data;
+  return {
+    props: { portfolios: portfolios}
   }
-  catch(e) {
-    console.log(e);
-    
-  }
-
-  return {posts:posts.slice(0,10)};
 }
 
 export default Portfolios

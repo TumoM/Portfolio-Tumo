@@ -16,7 +16,8 @@ const Index = () => {
     <BaseLayout 
       user={user} 
       loading={isLoading}
-      className="cover"
+      className='cover'
+      navClass='transparent'
     >
       <div className="main-section">
         <div className="background-image">
