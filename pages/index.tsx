@@ -21,7 +21,7 @@ const Index = () => {
     >
       <div className="main-section">
         <div className="background-image">
-          <img src="/images/background-index.png" alt="Home Background"/>
+          <Image layout="fill" src="/images/background-index.png" alt="Home Background"/>
         </div>
         <Container>
           <Row>
@@ -35,7 +35,7 @@ const Index = () => {
                         Have a look at my portfolio and job history.
                       </div>
                     </div>
-                    <img className="image" alt="Avatar by a laptop" src="/images/section-1.png"/>
+                    <Image width="464" height="580" className="image" alt="Avatar by a laptop" src="/images/section-1.png"/>
                     <div className="shadow-custom">
                       <div className="shadow-inner"> </div>
                     </div>

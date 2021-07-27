@@ -45,45 +45,48 @@ const PortfolioDetail = ({ portfolio }):JSX.Element => {
     )
 }
 
+// Function executed at build time
+export async function getStaticPaths() {
+  const json = await new PortfolioApi().getAll()
+  try{
+    const data = json.data;
+
+    // get paths of id's for portfolios we want to pre-render
+    const paths = data.map(portfolio => {
+        return {
+            params:{
+                id:portfolio._id
+            }
+        }
+      });
+    return {
+        paths,
+        fallback: true
+    }
+  }
+  catch(err){
+    console.log("Error---",err);
+    return {
+        props:{
+            portfolios:null
+        }
+    }
+  }
+}
+
 // This gets called at build time
 export async function getStaticProps({ params }) {
   // params contains the portfolio `id`.
-  // If the route is like /posts/1, then params.id is 1
   const json = await new PortfolioApi().getById(params.id) 
-  const portfolio = await json.data
+  try{
+    const portfolio = await json.data
 
-  // Pass portfolio data to the page via props
-  return { props: { portfolio } }
-}
-
-export async function getStaticPaths() {
-      const rawData = await axios.get("http://localhost:3001/api/v1/portfolios/")
-      try{
-          const data = await rawData.data;
-          const paths = data.map(portfolio => {
-              return {
-                  params:{
-                      id:portfolio._id
-                  }
-              }
-          });
-          return {
-              paths,
-              fallback: true
-          }
-          
-      }
-      catch(err){
-          console.log("Error---",err);
-          return {
-              props:{
-                  portfolios:null
-              }
-          }
-      }
+    // Pass portfolio data to the page via props
+    return { props: { portfolio } }
   }
-
-  
-
+  catch(e){
+    return { props: { portfolio:null } }
+  }
+}
 
 export default PortfolioDetail

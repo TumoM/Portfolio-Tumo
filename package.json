@@ -7,7 +7,7 @@
     "dev": "nodemon server/server.js",
     "dev:debug": "set NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
-    "start": "$env:NODE_ENV=production node server/server.js",
+    "start": "(Set NODE_ENV=production && node server/server.js)||(NODE_ENV=production && node server/server.js)",
     "lint": "next lint",
     "populate": "node server/populate/index.js"
   },

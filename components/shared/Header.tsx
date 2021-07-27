@@ -31,7 +31,7 @@ const LogoutLink = () => {
   return <BsNavLink href="/api/auth/logout "title="Logout"/>
 }
 
-const Header = ({user, loading, className = ""}) => {
+const Header = ({user=null, loading=false, className = ""}) => {
   const [isOpen, setIsOpen] = useState(false);
   // const { user, error, isLoading } = useUser();
   const toggle = () => setIsOpen(!isOpen);

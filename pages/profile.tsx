@@ -26,12 +26,12 @@ const Profile = ({user, isLoading}:{user:IUser, isLoading:boolean}) =>  {
             <CardBody>
               <CardTitle tag="h5">{user.name}</CardTitle>
               <CardSubtitle tag="h6" className="mb-2 text-muted">{user.email}</CardSubtitle>
-              <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+              <CardText>Some quick example text to build on the card title and make up the bulk of the card&apos;s content.</CardText>
               <Button>Edit</Button>
             </CardBody>
           </Card>
         </BasePage>
-      </BaseLayout>
+      </BaseLayout> 
     )
   }
 

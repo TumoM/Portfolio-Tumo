@@ -12,7 +12,7 @@ const Redirect = ({to, ssr}:{to:string, ssr:any}) => {
         else{
             router.push(to)
         }
-    }, [])
+    }, )
 
     return null
 }
