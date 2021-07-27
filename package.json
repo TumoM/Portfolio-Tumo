@@ -8,7 +8,8 @@
     "dev:debug": "set NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "$env:NODE_ENV=production node server/server.js",
-    "lint": "next lint"
+    "lint": "next lint",
+    "populate": "node server/populate/index.js"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^1.5.0",
