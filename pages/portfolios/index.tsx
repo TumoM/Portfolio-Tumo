@@ -68,7 +68,9 @@ const Portfolios = ({portfolios}) =>  {
 
 // Get portfolios data at build time
 export async function getStaticProps() {
+  console.log("Calling GetAll");
   const json = await new PortfolioApi().getAll();
+  console.log("Called GetAll");
   const portfolios = json.data;
   return {
     props: { portfolios: portfolios}

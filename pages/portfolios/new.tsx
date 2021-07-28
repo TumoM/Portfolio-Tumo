@@ -10,28 +10,21 @@ import PortfolioForm from 'components/PortfolioForm';
 import { Row, Col } from 'reactstrap';
 import axios from 'axios';
 import PortfolioApi from 'lib/api/portfolios'
+import { getAccessToken } from '@auth0/nextjs-auth0';
+import { useCreatePortfolio } from 'helpers/portfolios';
+import Redirect from 'components/shared/redirect';
 
-const PortfolioNew = ({user, loading}) =>  {
+const PortfolioNew = ({user, loading:loadingProp}) =>  {
 //   const { user, error, isLoading } = useUser();
+const [createPortfolio, {data, loading, error}] = useCreatePortfolio();
 
-const handleCratePortfolio = async (data) => {
-    alert(JSON.stringify(data))
-    try{
-        const axiosRes = await new PortfolioApi().createPortfolio(data);
-        console.log("AxiosRes Data:", axiosRes.data)
-    }
-    catch(e){
-        console.log('Error submitting Form\n',e);
-        
-    }
-}
-
+if (data) {return  <Redirect to="/portfolios" />}
   return (
-    <BaseLayout user={user} loading={loading}>
+    <BaseLayout user={user} loading={loadingProp}>
       <BasePage header="Create Portfolio">
         <Row>
             <Col md="8" className="mx-auto">
-                <PortfolioForm onSubmit={handleCratePortfolio}/>
+                <PortfolioForm onSubmit={createPortfolio}/>
             </Col>
         </Row>
       </BasePage>

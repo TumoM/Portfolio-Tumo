@@ -17,7 +17,7 @@ const Index = () => {
       user={user} 
       loading={isLoading}
       className='cover'
-      navClass='transparent'
+      navClass='mav-dark'
     >
       <div className="main-section">
         <div className="background-image">
