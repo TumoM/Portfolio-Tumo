@@ -36,7 +36,16 @@ const portfolioSchema = new Schema({
         required: true
         },
     endDate: {
-        type: Date },
+        type: Date 
+    },
+    userId: {
+        type: String, 
+        required:true,
+    },
+    disableEndDate: {
+        type: Boolean, 
+        default:false
+    },
     createdAt: {
         type: Date, 
         default: Date.now 

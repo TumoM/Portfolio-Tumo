@@ -7,7 +7,8 @@ const next = require('next');
 const { connect } = require('./db')
 const example = require('./routes/example')
 const postsRoutes = require('./routes/posts');
-const portfoliosRoutes = require('./routes/portfolios');
+const portfoliosRoutes = require('./routes/portfolios.ts');
+const bodyParser = require('body-parser');
 
 const port = process.env.PORT || 3001
 const dev = process.env.NODE_ENV !== 'production'
@@ -25,12 +26,13 @@ async function runServer() {
             server.prepare().then(() => {
                   console.log("Prepared Server");
       
-                  const app = express()
+                  const app = express();
+                  app.use(bodyParser.json());
                   app.use(`${apiString}example`, example)
                   app.use(`${apiString}posts`, postsRoutes)
                   app.use(`${apiString}portfolios`, portfoliosRoutes)
       
-      
+                  
                   app.all('*', (req, res) => {
                         return (handle(req, res))
                   })
