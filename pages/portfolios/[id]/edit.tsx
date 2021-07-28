@@ -8,7 +8,7 @@ import MyLoading from "components/shared/MyLoading";
 import {useUser} from "@auth0/nextjs-auth0";
 import withAuth from "hoc/withAuth";
 import { useGetPortfolio } from "helpers/portfolios"
-import PortfolioForm from "../../../components/PortfolioForm";
+import PortfolioForm from "components/PortfolioForm";
 
 interface Portfolio {
     body: string;
@@ -36,7 +36,12 @@ const PortfolioEdit = ({user:userAdmin}) => {
                 {
                     <Row>
                         <Col md={"8"} ms={"10"}>
-                            <PortfolioForm/>
+                            {portfolio &&
+                            <PortfolioForm
+                                onSubmit={(data => alert(JSON.stringify(data)))}
+                                initialData={portfolio}
+                            />
+                            }
                         </Col>
                     </Row>
                 }

@@ -3,7 +3,7 @@ import { useApiHandler } from 'helpers'
 import useSWR from 'swr';
 import { myFetcher } from "helpers"
 
-interface IPortfolio {
+export interface IPortfolio {
   title: string,
   company: string,
   companyWebsite: string,

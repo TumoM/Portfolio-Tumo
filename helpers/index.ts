@@ -4,7 +4,16 @@ import {useState} from "react";
 import {createPortfolio} from "./portfolios";
 
 export const myFetcher = (url:string) => {
-  return axios.get(url).then(res=>res.data)
+  return axios.get(url).then(res=>res.data).catch(e=>Promise.reject(e))
+  // fetch(url).then(async res => {
+  //   const result = await res.json();
+  //
+  //   if (res.status !== 200) {
+  //     return Promise.reject(result);
+  //   } else {
+  //     return result.json;
+  //   }
+  // });
 }
 
 export function useApiHandler(apiCallback) {
