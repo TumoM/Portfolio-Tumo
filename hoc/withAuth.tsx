@@ -5,7 +5,7 @@ import React from 'react';
 import { Container } from 'reactstrap';
 import { isAuthorized } from 'utils/auth0';
 
-const withAuth = (Component:any)=> (role?:string) =>  {
+const withAuth = (Component)=> (role?:string) =>  {
   role = role.toLowerCase();  
   return props => {
       const { user, error, isLoading } = useUser();
