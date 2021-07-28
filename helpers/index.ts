@@ -20,7 +20,8 @@ export function useApiHandler(apiCallback) {
       const json = await apiCallback(...data);
       setRequestState({error: null, data: json.data, loading: false})
     } catch (e) {
-      const message = (e.response && e.response.message) || 'Oooops,something went wrong'
+
+      const message = (e.response && e.response.data.message) || (e.response && e.response.data) || 'Oooops,something went wrong'
       setRequestState({error: message, data: null, loading: false})
 
     }

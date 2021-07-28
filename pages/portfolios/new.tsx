@@ -25,6 +25,7 @@ if (data) {return  <Redirect to="/portfolios" />}
         <Row>
             <Col md="8" className="mx-auto">
                 <PortfolioForm onSubmit={createPortfolio}/>
+                {error && <div className="alert alert-danger mt-3">{error}</div>}
             </Col>
         </Row>
       </BasePage>
