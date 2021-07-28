@@ -3,7 +3,7 @@ import useSWR from 'swr'
 import {useState} from "react";
 import {createPortfolio} from "./portfolios";
 
-const myFetcher = (url:string) => {
+export const myFetcher = (url:string) => {
   return axios.get(url).then(res=>res.data)
 }
 

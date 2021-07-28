@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { useApiHandler } from 'helpers'
+import useSWR from 'swr';
+import { myFetcher } from "helpers"
 
 interface IPortfolio {
   title: string,
@@ -20,4 +22,9 @@ export function createPortfolio(data:IPortfolio) {
 
 export function useCreatePortfolio() {
   return useApiHandler(createPortfolio);
+}
+
+export const useGetPortfolio = (id) => {
+  const { data, error, ...rest}  = useSWR(id ? `/api/v1/portfolios/${id}`: null, myFetcher)
+  return { data, error, loading: !data && !error, ...rest}
 }

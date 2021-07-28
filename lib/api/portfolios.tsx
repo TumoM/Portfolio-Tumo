@@ -4,9 +4,9 @@ import axios from "axios";
 class PortfolioApi {
     private _apiUrl: string;
     private _config?: {headers?:object};
-    
+
     constructor(accessToken=null) {
-        this._config = {} 
+        this._config = {}
 
         if (accessToken) {
             console.log("Setting Headers");
@@ -22,6 +22,7 @@ class PortfolioApi {
         this._apiUrl = process.env.PORTFOLIO_API_URL + '/portfolios';
     }
 
+
     getAll() {
         console.log("this._apiUrl:",this._apiUrl);
         return axios.get(this._apiUrl)
@@ -33,7 +34,7 @@ class PortfolioApi {
 
     createPortfolio(data) {
         console.log("Making Post to:",this._apiUrl);
-        
+
         return axios.post(this._apiUrl, data, this._config);
       }
 
