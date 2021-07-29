@@ -4,19 +4,21 @@
     z-index: 15;
     padding: 40px;
 
-    &.mav-dark {
-      background-color: #333;      
+    &.nav-dark {
+      background-color: #333;
       background-image: linear-gradient(45deg,#1E1E1E 0%,#333 100%);
 
     }
-    
+
     &.with-bg {
       background-image: linear-gradient(45deg,#00aeef 0%,#096fb9 100%);
       padding:30px;
     }
-  
+
     .port-navbar {
-      
+        &a.nav-link.port-navbar-link.active {
+          color: #dba919;
+        }
       &-brand {
         color: white;
         font-size: 24px;
@@ -24,23 +26,23 @@
         letter-spacing: 1px;
         font-weight: bold;
       }
-  
+
       &-item {
         margin-left: 10px;
         margin-right: 10px;
       }
-  
-      &-link {
+
+      &-link.nav-link{
         color: white;
         font-weight: bold;
         letter-spacing: 0.8px;
         font-size: 18px;
         text-transform: uppercase;
-  
+
         &.active {
         color: #dba919;
         }
-  
+
         &:hover, &:focus {
           color: #dba919;
         }

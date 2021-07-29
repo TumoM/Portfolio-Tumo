@@ -17,5 +17,15 @@ export default async function handlePortfolio(req:NextApiRequest, res:NextApiRes
             return res.status(e.status ||e.statusCode || 422).json(e.response.data||"Oooops, error updating resource");
         }
     }
+    else if (req.method === 'DELETE') {
+        const { accessToken } = await getAccessToken(req, res);
+        try{
+            const json = await new PortfolioApi(accessToken).delete(req.query.id)
+            return res.status(200).json(json.data);
+        }
+        catch (e) {
+            return res.status(e.status ||e.statusCode || 422).json(e.response.data||"Oooops, error updating resource");
+        }
+    }
 }
 

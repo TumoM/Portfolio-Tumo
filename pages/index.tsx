@@ -13,11 +13,11 @@ const Index = () => {
   const { user, error, isLoading } = useUser();
 
   return (
-    <BaseLayout 
-      user={user} 
+    <BaseLayout
+      user={user}
       loading={isLoading}
       className='cover'
-      navClass='mav-dark'
+      navClass='nav-dark'
     >
       <div className="main-section">
         <div className="background-image">

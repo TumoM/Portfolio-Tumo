@@ -19,16 +19,18 @@ interface IProps {
 const PortfolioForm = ({onSubmit, loadingData=false,buttonText="Create", initialData = null}:IProps) => {
     const { width } = useWindowDimensions();
     // const { register, handleSubmit, setValue, reset } = useForm({defaultValues:initialData.data});
-    const { register, handleSubmit, setValue } = useForm({defaultValues: initialData.data});
+    const { register, handleSubmit, setValue } = useForm({defaultValues: initialData?.data});
 
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
     const [disableEndDate, setDisableEndDate] = useState(false)
 
+/*
     useEffect(() => {
         // setValue(initialData.data)
         console.log("Initial Data:",initialData)
     }, [reset, initialData]);
+*/
 
     useEffect(() => {
         console.log("Doing Date Magic")
@@ -75,7 +77,7 @@ const PortfolioForm = ({onSubmit, loadingData=false,buttonText="Create", initial
                 type="text"
                 defaultValue={initialData?.data?.title}
 
-                // placeholder="XYZ"
+                placeholder="Job ABC..."
                 {...register("title")}
                 id="title"/>
             </FormGroup>

@@ -27,12 +27,21 @@ export function updatePortfolio(id:string|number,data:IPortfolio) {
   return res
 }
 
+export function deletePortfolio(id:string|number) {
+  const res = axios.delete(`/api/v1/portfolios/${id}`);
+  console.log("Made deletePortfolio Delete call");
+  return res
+}
+
 export function useCreatePortfolio() {
   return useApiHandler(createPortfolio);
 }
 
 export function useUpdatePortfolio() {
   return useApiHandler(updatePortfolio);
+}
+export function useDeletePortfolio() {
+  return useApiHandler(deletePortfolio);
 }
 
 export const useGetPortfolio = (id) => {
