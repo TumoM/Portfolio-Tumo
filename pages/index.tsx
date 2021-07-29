@@ -34,7 +34,8 @@ const Index = () => {
       user={user}
       loading={isLoading}
       className={`cover ${isFlipping ? 'cover-orange' : 'cover-blue'}`}
-      navClass='nav-dark'
+      // navClass=' '
+      isFlipping={isFlipping}
     >
       <div className="main-section">
         <div className="background-image">
