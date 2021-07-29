@@ -26,7 +26,7 @@ const Index = () => {
     // @ts-ignore
     flipInterval.current = setInterval(() => {
       setIsFlipping((prev) => !prev)
-    }, 12000);
+    }, 20000);
   }
 
   return (

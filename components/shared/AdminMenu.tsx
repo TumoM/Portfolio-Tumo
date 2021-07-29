@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
-import BsNavLink from "./BsNavLink";
+import {BsNavLink} from "./BsComponents";
 
 const AdminMenu = ({name}:{name:string}) => {
   const [isOpen, setIsOpen] = useState(false);

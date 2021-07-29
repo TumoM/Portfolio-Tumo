@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useResizeDetector } from 'react-resize-detector';
 import {
   Collapse,
   Navbar,
@@ -10,7 +11,7 @@ import {
 } from 'reactstrap';
 import {isAuthorized} from "../../utils/auth0";
 import AdminMenu from "./AdminMenu";
-import BsNavLink from "./BsNavLink";
+import { BsNavLink, BsNavBrand  } from "./BsComponents";
 
 
 
@@ -22,27 +23,24 @@ const LogoutLink = () => {
   return <BsNavLink href="/api/auth/logout "title="Logout"/>
 }
 
-
-
 const Header = ({user=null, loading=false, className = ""}) => {
   const [isOpen, setIsOpen] = useState(false);
   // const { user, error, isLoading } = useUser();
   const toggle = () => setIsOpen(!isOpen);
-
+  const { width, height, ref } = useResizeDetector();
   return (
-    <div>
+    <div ref={ref}>
       <Navbar
         className={`port-navbar port-default absolute ${className}`}
         dark
-        expand="md">
-        <div className='navbar-brand'>
-          <Link href="/">
-            <a className="port-navbar-brand">Tumo Masire</a>
-          </Link>
-        </div>
+        expand="md"
+
+      >
+        <BsNavBrand/>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
+
             <NavItem className="port-navbar-item">
               <BsNavLink href="/" title="Home"/>
             </NavItem>
