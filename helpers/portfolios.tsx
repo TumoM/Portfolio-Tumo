@@ -10,8 +10,9 @@ export interface IPortfolio {
   location: string,
   jobTitle: string,
   description: string,
-  startDate:  Date,
-  endDate?: Date
+  startDate:  Date|string,
+  endDate?: Date|string,
+  disableEndDate?: boolean
 }
 
 export function createPortfolio(data:IPortfolio) {
@@ -24,6 +25,10 @@ export function updatePortfolio(id:string|number,data:IPortfolio) {
   const res = axios.patch(`/api/v1/portfolios/${id}`, data);
   console.log("Made updatePortfolio Patch call");
   return res
+}
+
+export function useCreatePortfolio() {
+  return useApiHandler(createPortfolio);
 }
 
 export function useUpdatePortfolio() {

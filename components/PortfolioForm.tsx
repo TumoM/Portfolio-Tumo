@@ -6,7 +6,17 @@ import axios from "axios";
 import {reset} from "colorette";
 import {IPortfolio} from "../helpers/portfolios";
 
-const PortfolioForm = ({onSubmit, loadingData=false,buttonText="Create", initialData = {}}) => {
+interface IInitialData {
+    data: {IPortfolio}|IPortfolio
+}
+
+interface IProps {
+    onSubmit: any,
+    loadingData?: boolean,
+    buttonText?: string,
+    initialData?: IInitialData,
+}
+const PortfolioForm = ({onSubmit, loadingData=false,buttonText="Create", initialData = null}:IProps) => {
     const { width } = useWindowDimensions();
     // const { register, handleSubmit, setValue, reset } = useForm({defaultValues:initialData.data});
     const { register, handleSubmit, setValue } = useForm({defaultValues: initialData.data});
@@ -23,6 +33,7 @@ const PortfolioForm = ({onSubmit, loadingData=false,buttonText="Create", initial
     useEffect(() => {
         console.log("Doing Date Magic")
         if (initialData && initialData.data){
+            // @ts-ignore
             const { startDate, endDate } = initialData?.data;
             if (startDate) { setStartDate(new Date(startDate))}
             if (endDate) { setEndDate(new Date(endDate))}
@@ -42,14 +53,19 @@ const PortfolioForm = ({onSubmit, loadingData=false,buttonText="Create", initial
             setEndDate(date)
         }
 
+        // @ts-ignore
         setValue(field,date);
     }
 
     useEffect(() => {
+        // @ts-ignore
         register('startDate');
+        // @ts-ignore
         register('endDate');
     },[register])
 
+    // @ts-ignore
+    // @ts-ignore
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
             <FormGroup>
@@ -69,7 +85,7 @@ const PortfolioForm = ({onSubmit, loadingData=false,buttonText="Create", initial
                 <Input
                 name="company"
                 type="text"
-                defaultValue={initialData?.data?.company}
+                defaultValue={initialData?.data?.company }
 
                 placeholder="Company X"
                 {...register("company")}
@@ -81,7 +97,7 @@ const PortfolioForm = ({onSubmit, loadingData=false,buttonText="Create", initial
                 <Input
                 name="companyWebsite"
                 type="text"
-                defaultValue={initialData?.data?.companyWebsite}
+                defaultValue={ initialData?.data?.companyWebsite }
                 placeholder="https://example.com"
                 {...register("companyWebsite")}
 
@@ -93,7 +109,7 @@ const PortfolioForm = ({onSubmit, loadingData=false,buttonText="Create", initial
                 <Input
                 name="location"
                 type="text"
-                defaultValue={initialData?.data?.location}
+                defaultValue={initialData?.data?.location }
                 placeholder="Gaborone, Botswana"
                 {...register("location")}
 
@@ -105,7 +121,7 @@ const PortfolioForm = ({onSubmit, loadingData=false,buttonText="Create", initial
                 <Input
                 name="jobTitle"
                 type="text"
-                defaultValue={initialData?.data?.jobTitle}
+                defaultValue={ initialData?.data?.jobTitle }
                 placeholder="Web Developer"
                 {...register("jobTitle")}
 
@@ -118,7 +134,7 @@ const PortfolioForm = ({onSubmit, loadingData=false,buttonText="Create", initial
                 name="description"
                 rows="5"
                 type="text"
-                defaultValue={initialData?.data?.description}
+                defaultValue={ initialData?.data?.description }
                 placeholder="I worked on XYZ..."
                 {...register("description")}
 
@@ -163,7 +179,7 @@ const PortfolioForm = ({onSubmit, loadingData=false,buttonText="Create", initial
                 type="checkbox"
                 {...register('disableEndDate')}
                 id="disableEndDate"
-                defaultChecked ={initialData?.data?.disableEndDate}
+                defaultChecked ={ initialData?.data?.disableEndDate}
                 className={`form-check-input`}
                 onChange={(d)=>{
                     console.log(d.target.checked);

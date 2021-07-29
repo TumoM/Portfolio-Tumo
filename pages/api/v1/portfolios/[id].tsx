@@ -14,8 +14,8 @@ export default async function handlePortfolio(req:NextApiRequest, res:NextApiRes
             return res.status(200).json(json.data);
         }
         catch (e) {
-            return res.status(e.status||410).json(e.message||'Ooooops, error updating portfolio');
+            return res.status(e.status ||e.statusCode || 422).json(e.response.data||"Oooops, error updating resource");
         }
     }
-
 }
+

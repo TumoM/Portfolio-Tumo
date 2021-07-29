@@ -28,11 +28,12 @@ export function useApiHandler(apiCallback) {
     try {
       const json = await apiCallback(...data);
       setRequestState({error: null, data: json.data, loading: false})
+      return json.data
     } catch (e) {
 
       const message = (e.response && e.response.data.message) || (e.response && e.response.data) || 'Oooops,something went wrong'
       setRequestState({error: message, data: null, loading: false})
-
+      return Promise.reject(message)
     }
   }
 

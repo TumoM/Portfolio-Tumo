@@ -9,7 +9,7 @@ import {useUser} from "@auth0/nextjs-auth0";
 import withAuth from "hoc/withAuth";
 import {useGetPortfolio, useUpdatePortfolio} from "helpers/portfolios"
 import PortfolioForm from "components/PortfolioForm";
-
+import { toast } from 'react-toastify';
 interface Portfolio {
     body: string;
     id: number;
@@ -21,11 +21,43 @@ const PortfolioEdit = ({user:userAdmin}) => {
     const { user:userAuthO, error, isLoading } = useUser();
     const router = useRouter();
     const portfolio = useGetPortfolio(router.query.id)
-    const [ updatePortfolio, {data, error:updateError, loading}] = useUpdatePortfolio();
+    // @ts-ignore
+    const [ updatePortfolio, {error:updateError, loading}] = useUpdatePortfolio();
     let user = userAuthO || userAdmin;
 
-    const _updatePortfolio = (data) => {
-        updatePortfolio(router.query.id,data)
+    const _updatePortfolio = async (data) => {
+        console.log("In _updateportfolio")
+        try{
+            // @ts-ignore
+            updatePortfolio(router.query.id, data)
+                .then(r => {
+                    console.log("R:",r)
+                    toast.success(`Portfolio Updated`, {
+                        position: "bottom-center",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                })
+                .catch(err => {
+                    toast.error(err, {
+                        position: "bottom-center",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                })
+
+        }
+        catch(e){
+            console.log("Catch Error:",e)
+        }
     }
     return (
         <BaseLayout user={user} loading={isLoading}>
@@ -59,4 +91,5 @@ const PortfolioEdit = ({user:userAdmin}) => {
     )
 }
 
-export default withAuth(PortfolioEdit)('admin')
+// @ts-ignore
+export default withAuth(PortfolioEdit)('admin');

@@ -16,7 +16,8 @@ import Redirect from 'components/shared/redirect';
 
 const PortfolioNew = ({user, loading:loadingProp}) =>  {
 //   const { user, error, isLoading } = useUser();
-const [createPortfolio, {data, loading, error}] = useCreatePortfolio();
+// @ts-ignore
+    const [createPortfolio, {data, loading, error}] = useCreatePortfolio();
 
 if (data) {return  <Redirect to="/portfolios" />}
   return (
