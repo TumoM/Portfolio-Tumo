@@ -6,19 +6,21 @@ import {
   Navbar,
   NavbarToggler,
   Nav,
-  NavItem
+  NavItem, Dropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap';
+import {isAuthorized} from "../../utils/auth0";
 
 interface PostProps {
   href: string;
   title: string;
+  className?: string;
 }
 
 const BsNavLink: React.FC<PostProps> = props => {
-  const { href, title } = props;
+  const { href, title, className=""} = props;
   return (
     <Link href={href}>
-      <a className="nav-link port-navbar-link ">{title}</a>
+      <a className={`nav-link port-navbar-link ${className}`}>{title}</a>
     </Link>
   )
 }
@@ -29,6 +31,44 @@ const LoginLink = () => {
 }
 const LogoutLink = () => {
   return <BsNavLink href="/api/auth/logout "title="Logout"/>
+}
+
+const AdminMenu = ({name}:{name:string}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <Dropdown
+      className="port-navbar-link port-dropdown-menu"
+      nav
+      isOpen={isOpen}
+      toggle={() => setIsOpen(!isOpen)}>
+      <DropdownToggle className="port-dropdown-toggle" nav caret>
+        Admin
+      </DropdownToggle>
+      <DropdownMenu right>
+        <DropdownItem>
+          <BsNavLink
+            className="port-dropdown-item"
+            href="/portfolios/new"
+            title="Create Portfolio"
+          />
+        </DropdownItem>
+        <DropdownItem>
+          <BsNavLink
+            className="port-dropdown-item"
+            href="/blogs/editor"
+            title="Blog Editor"
+          />
+        </DropdownItem>
+        <DropdownItem>
+          <BsNavLink
+            className="port-dropdown-item"
+            href="/blogs/dashboard"
+            title="Dashboard"
+          />
+        </DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+  )
 }
 
 const Header = ({user=null, loading=false, className = ""}) => {
@@ -69,10 +109,11 @@ const Header = ({user=null, loading=false, className = ""}) => {
           <Nav navbar>
           { !loading &&
               <>
-                { user &&
+                { user && isAuthorized(user,'admin') &&
                   <>
                     <NavItem className="port-navbar-item">
-                      <BsNavLink href="/profile" title={user.given_name || user.name}/>
+                        <AdminMenu name={user.given_name || user.name}/>
+                      {/*<BsNavLink href="/profile" title={user.given_name || user.name}/>*/}
                     </NavItem>
                     <NavItem className="port-navbar-item">
                       <LogoutLink/>

@@ -30,6 +30,7 @@ const Portfolios = ({portfolios:initialPortfolios}) =>  {
     e.stopPropagation
     const isConfirm = confirm("Are you sure you want to delete?")
     if (isConfirm === true){
+      // @ts-ignore
       deletePortfolio(id)
         .then(r => {
           const tempPortfolios = portfolios.filter((portfolio => {
@@ -140,7 +141,8 @@ export async function getStaticProps() {
   console.log("Called GetAll");
   const portfolios = json.data;
   return {
-    props: { portfolios: portfolios}
+    props: { portfolios: portfolios},
+    revalidate: 1
   }
 }
 

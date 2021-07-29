@@ -14,7 +14,7 @@ interface IProps {
     onSubmit: any,
     loadingData?: boolean,
     buttonText?: string,
-    initialData?: IInitialData,
+    initialData?: any,
 }
 const PortfolioForm = ({onSubmit, loadingData=false,buttonText="Create", initialData = null}:IProps) => {
     const { width } = useWindowDimensions();

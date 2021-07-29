@@ -1,6 +1,6 @@
 
 
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import BaseLayout from 'components/layouts/BaseLayout'
 import { Container, Row, Col } from 'reactstrap';
 import Typed from 'react-typed';
@@ -11,12 +11,29 @@ import { useUser } from '@auth0/nextjs-auth0';
 const roles = ["Developer","Web Development","Back-end Developer","Fullstack Developer","Front-end Developer"]
 const Index = () => {
   const { user, error, isLoading } = useUser();
+  const [isFlipping, setIsFlipping ] = useState(false)
+  const flipInterval = useRef();
+
+  useEffect(() => {
+    startAnimation()
+    return () => {
+      if (flipInterval.current) clearInterval(flipInterval.current)
+    };
+  }, []);
+
+
+  const startAnimation = () => {
+    // @ts-ignore
+    flipInterval.current = setInterval(() => {
+      setIsFlipping((prev) => !prev)
+    }, 12000);
+  }
 
   return (
     <BaseLayout
       user={user}
       loading={isLoading}
-      className='cover'
+      className={`cover ${isFlipping ? 'cover-orange' : 'cover-blue'}`}
       navClass='nav-dark'
     >
       <div className="main-section">
@@ -27,8 +44,8 @@ const Index = () => {
           <Row>
             <Col md="6">
               <div className="hero-section">
-                <div className={`flipper`}>
-                  <div className="back">
+                <div className={`flipper ${isFlipping ? 'isFlipping' : ''}`}>
+                  <div className="front">
                     <div className="hero-section-content">
                       <h2> Full Stack Web Developer </h2>
                       <div className="hero-section-content-intro">
@@ -37,6 +54,18 @@ const Index = () => {
                     </div>
                     <Image width="464" height="580" className="image" alt="Avatar by a laptop" src="/images/section-1.png"/>
                     <div className="shadow-custom">
+                      <div className="shadow-inner"> </div>
+                    </div>
+                  </div>
+                  <div className="back">
+                    <div className="hero-section-content">
+                      <h2> Full Stack Web Developer </h2>
+                      <div className="hero-section-content-intro">
+                        Have a look at my portfolio and job history.
+                      </div>
+                    </div>
+                    <Image width="464" height="580" className="image" alt="Avatar by a laptop" src="/images/section-2.png"/>
+                    <div className="shadow-custom-orange">
                       <div className="shadow-inner"> </div>
                     </div>
                   </div>

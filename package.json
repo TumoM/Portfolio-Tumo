@@ -9,14 +9,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "populate": "node populate/index.js"
+    "populate": "nodemon populate/index.ts"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^1.5.0",
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.4.1",
-    "dotenv-webpack": "^1.7.0",
     "next": "11.0.1",
     "react": "^17.0.2",
     "react-datepicker": "^4.1.1",

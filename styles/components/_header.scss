@@ -48,4 +48,30 @@
         }
       }
     }
+  .port-dropdown-menu {
+    button.dropdown-item:hover {
+      background-color: #373737;
+      //background-color: #058CD2;
+    }
+    .port-dropdown-item {
+      color: #4e4e4e;
+
+      button.hover {
+        background-color: #373737;
+      }
+      &.active {
+        color: #dba919;
+      }
+    }
+
+    .port-dropdown-toggle {
+      color: white;
+      margin-left: 10px;
+      margin-right: 10px;
+      font-weight: bold;
+      letter-spacing: 0.8px;
+      font-size: 18px;
+      text-transform: uppercase;
+    }
   }
+}
