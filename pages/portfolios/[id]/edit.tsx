@@ -7,7 +7,7 @@ import React from "react";
 import MyLoading from "components/shared/MyLoading";
 import {useUser} from "@auth0/nextjs-auth0";
 import withAuth from "hoc/withAuth";
-import { useGetPortfolio } from "helpers/portfolios"
+import {useGetPortfolio, useUpdatePortfolio} from "helpers/portfolios"
 import PortfolioForm from "components/PortfolioForm";
 
 interface Portfolio {
@@ -21,8 +21,12 @@ const PortfolioEdit = ({user:userAdmin}) => {
     const { user:userAuthO, error, isLoading } = useUser();
     const router = useRouter();
     const portfolio = useGetPortfolio(router.query.id)
+    const [ updatePortfolio, {data, error:updateError, loading}] = useUpdatePortfolio();
     let user = userAuthO || userAdmin;
 
+    const _updatePortfolio = (data) => {
+        updatePortfolio(router.query.id,data)
+    }
     return (
         <BaseLayout user={user} loading={isLoading}>
             <BasePage
@@ -35,11 +39,13 @@ const PortfolioEdit = ({user:userAdmin}) => {
                 }
                 {
                     <Row>
-                        <Col md={"8"} ms={"10"}>
+                        <Col md={"8"} ms={"10"} className="mx-auto">
                             {portfolio &&
                             <PortfolioForm
-                                onSubmit={(data => alert(JSON.stringify(data)))}
+                                onSubmit={_updatePortfolio}
                                 initialData={portfolio}
+                                buttonText={'Update'}
+                                loadingData={loading}
                             />
                             }
                         </Col>

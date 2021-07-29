@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, FormGroup, Input, Label } from "reactstrap";
+import {Button, Form, FormGroup, Input, Label, Spinner} from "reactstrap";
 import DatePicker from "react-datepicker";
 import { useForm, Controller } from "react-hook-form"
 import axios from "axios";
 import {reset} from "colorette";
 import {IPortfolio} from "../helpers/portfolios";
 
-const PortfolioForm = ({onSubmit, initialData = {}}:{onSubmit:any,initialData:IPortfolio|any}) => {
+const PortfolioForm = ({onSubmit, loadingData=false,buttonText="Create", initialData = {}}) => {
     const { width } = useWindowDimensions();
     // const { register, handleSubmit, setValue, reset } = useForm({defaultValues:initialData.data});
-    const { register, handleSubmit, setValue } = useForm({defaultValues: initialData});
+    const { register, handleSubmit, setValue } = useForm({defaultValues: initialData.data});
 
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
@@ -24,7 +24,6 @@ const PortfolioForm = ({onSubmit, initialData = {}}:{onSubmit:any,initialData:IP
         console.log("Doing Date Magic")
         if (initialData && initialData.data){
             const { startDate, endDate } = initialData?.data;
-            const { startDate2, endDate2 } = initialData;
             if (startDate) { setStartDate(new Date(startDate))}
             if (endDate) { setEndDate(new Date(endDate))}
         }
@@ -58,9 +57,9 @@ const PortfolioForm = ({onSubmit, initialData = {}}:{onSubmit:any,initialData:IP
                 <Input
                 name="title"
                 type="text"
-                value={initialData?.data?.title}
-                ref={register}
-                placeholder="XYZ"
+                defaultValue={initialData?.data?.title}
+
+                // placeholder="XYZ"
                 {...register("title")}
                 id="title"/>
             </FormGroup>
@@ -70,8 +69,8 @@ const PortfolioForm = ({onSubmit, initialData = {}}:{onSubmit:any,initialData:IP
                 <Input
                 name="company"
                 type="text"
-                value={initialData?.data?.company}
-                ref={register}
+                defaultValue={initialData?.data?.company}
+
                 placeholder="Company X"
                 {...register("company")}
                 id="company"/>
@@ -82,10 +81,10 @@ const PortfolioForm = ({onSubmit, initialData = {}}:{onSubmit:any,initialData:IP
                 <Input
                 name="companyWebsite"
                 type="text"
-                value={initialData?.data?.companyWebsite}
+                defaultValue={initialData?.data?.companyWebsite}
                 placeholder="https://example.com"
                 {...register("companyWebsite")}
-                ref={register}
+
                 id="companyWebsite"/>
             </FormGroup>
 
@@ -94,10 +93,10 @@ const PortfolioForm = ({onSubmit, initialData = {}}:{onSubmit:any,initialData:IP
                 <Input
                 name="location"
                 type="text"
-                value={initialData?.data?.location}
+                defaultValue={initialData?.data?.location}
                 placeholder="Gaborone, Botswana"
                 {...register("location")}
-                ref={register}
+
                 id="location"/>
             </FormGroup>
 
@@ -106,10 +105,10 @@ const PortfolioForm = ({onSubmit, initialData = {}}:{onSubmit:any,initialData:IP
                 <Input
                 name="jobTitle"
                 type="text"
-                value={initialData?.data?.jobTitle}
+                defaultValue={initialData?.data?.jobTitle}
                 placeholder="Web Developer"
                 {...register("jobTitle")}
-                ref={register}
+
                 id="jobTitle"/>
             </FormGroup>
 
@@ -119,10 +118,10 @@ const PortfolioForm = ({onSubmit, initialData = {}}:{onSubmit:any,initialData:IP
                 name="description"
                 rows="5"
                 type="text"
-                value={initialData?.data?.description}
+                defaultValue={initialData?.data?.description}
                 placeholder="I worked on XYZ..."
                 {...register("description")}
-                ref={register}
+
                 id="description">
                 </Input>
             </FormGroup>
@@ -164,7 +163,7 @@ const PortfolioForm = ({onSubmit, initialData = {}}:{onSubmit:any,initialData:IP
                 type="checkbox"
                 {...register('disableEndDate')}
                 id="disableEndDate"
-                checked={initialData?.data?.disableEndDate}
+                defaultChecked ={initialData?.data?.disableEndDate}
                 className={`form-check-input`}
                 onChange={(d)=>{
                     console.log(d.target.checked);
@@ -178,8 +177,13 @@ const PortfolioForm = ({onSubmit, initialData = {}}:{onSubmit:any,initialData:IP
                 type="submit"
                 className=""
                 color="primary"
+                disabled={loadingData}
                 >
-                    Create
+                {
+                    loadingData?
+                        <Spinner />
+                        :buttonText
+                }
             </Button>
         </Form>
     )

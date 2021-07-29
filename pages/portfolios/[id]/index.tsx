@@ -32,9 +32,12 @@ const PortfolioDetail = ({ portfolio }):JSX.Element => {
                 </div>
                 }
                 {portfolio && !isLoading &&
-                <p>
+                    <>
+                    <p>
                     {JSON.stringify(portfolio,null,2)}
-                </p>
+                    </p>
+
+                    </>
                 }
                 { error && !isLoading &&
                 <div className="alert alert-danger"><h5>{error?.message}</h5></div>

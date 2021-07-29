@@ -32,11 +32,15 @@ class PortfolioApi {
         return axios.get(`${this._apiUrl}/${id}`)
     }
 
-    createPortfolio(data) {
+    create(data) {
         console.log("Making Post to:",this._apiUrl);
-
         return axios.post(this._apiUrl, data, this._config);
-      }
+    }
+    update(id, data) {
+        debugger
+        console.log("Making Patch to:",this._apiUrl);
+        return axios.patch(`${this._apiUrl}/${id}`, data, this._config);
+    }
 
 }
 

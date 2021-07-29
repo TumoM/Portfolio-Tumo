@@ -16,12 +16,18 @@ export interface IPortfolio {
 
 export function createPortfolio(data:IPortfolio) {
   const res = axios.post('/api/v1/portfolios', data);
-  console.log("Made call");
+  console.log("Made createPortfolio Post call");
   return res
 }
 
-export function useCreatePortfolio() {
-  return useApiHandler(createPortfolio);
+export function updatePortfolio(id:string|number,data:IPortfolio) {
+  const res = axios.patch(`/api/v1/portfolios/${id}`, data);
+  console.log("Made updatePortfolio Patch call");
+  return res
+}
+
+export function useUpdatePortfolio() {
+  return useApiHandler(updatePortfolio);
 }
 
 export const useGetPortfolio = (id) => {
