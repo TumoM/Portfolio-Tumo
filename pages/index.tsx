@@ -78,7 +78,7 @@ const Index = () => {
                   </div>
                 </div>
               </Col>
-              <Col md="6" className="hero-welcome-wrapper">
+              <Col md="5" className="ml-2 hero-welcome-wrapper">
                 <div className="hero-welcome-text">
                   <h1>
                     Welcome to the portfolio website of Tumo Masire.

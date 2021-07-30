@@ -10,6 +10,13 @@
       transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s;
       margin-bottom: 20px;
 
+      .portfolio-card-city{
+        margin-bottom:0;
+      }
+
+      .portfolio-card-dates{
+        margin-bottom:1rem;
+      }
       &:hover {
         cursor: pointer;
         transform: translateY(-5px);

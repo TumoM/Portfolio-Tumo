@@ -106,7 +106,6 @@ const Portfolios = ({portfolios:initialPortfolios}) =>  {
     }
   }
 
-
   return (
     <BaseLayout
       user={user}

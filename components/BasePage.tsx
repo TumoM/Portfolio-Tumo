@@ -3,6 +3,7 @@ import { Container } from "reactstrap"
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
+
 interface PostProps {
     children: JSX.Element[] | JSX.Element | (string | Element)[];
     className?: string[] | string,
@@ -11,17 +12,23 @@ interface PostProps {
     indexPage?:boolean;
     metaDescription?:string;
     canonicalPath?:string;
+    noWrapper?:boolean
   }
 
 const BasePage: React.FC<PostProps> = (props) => {
   const router = useRouter();
+  const PageHeader = ({header}) =>
+    <div className="page-header">
+      <h1 className="page-header-title">{header}</h1>
+    </div>
 
-    const {
+  const {
       className = "",
       indexPage=null,
       children,
       header,
       canonicalPath,
+      noWrapper,
       title = "Portfolio - Tumo Masire",
       metaDescription="My name is Tumo Masire and I am an experienced software engineer, web developer, and freelance " +
         "developer. Throughout my career, I have acquired a wide breadth of technical knowledge and the ability to explain programming topics clearly and in detail to a broad audience.",
@@ -59,15 +66,18 @@ const BasePage: React.FC<PostProps> = (props) => {
           />
         </Head>
         <div className={` ${pageType} ${className}`}>
-              <Container>
-                  {
-                      header &&
-                      <div className="page-header text-center">
-                          <h1 className='page-header-title'>{header}</h1>
-                      </div>
-                  }
-                  {children}
-              </Container>
+            { noWrapper &&
+            <>
+              { header && <PageHeader header={header} /> }
+              {children}
+            </>
+            }
+            { !noWrapper &&
+            <Container>
+              { header && <PageHeader header={header} /> }
+              {children}
+            </Container>
+            }
           </div>
       </>
     )

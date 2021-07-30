@@ -135,7 +135,7 @@ const PortfolioForm = ({onSubmit, loadingData=false,buttonText="Create", initial
                 <Input
                 name="description"
                 rows="5"
-                type="text"
+                type="textarea"
                 defaultValue={ initialData?.data?.description }
                 placeholder="I worked on XYZ..."
                 {...register("description")}
