@@ -35,7 +35,8 @@ const Index = () => {
       user={user}
       loading={isLoading}
       className={`cover ${isFlipping ? 'cover-orange' : 'cover-blue'}`}
-      // navClass=' '
+      transparent
+      indexPage
       isFlipping={isFlipping}
     >
       <div className="main-section">

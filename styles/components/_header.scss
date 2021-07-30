@@ -1,8 +1,17 @@
+nav.port-navbar {
+
+}
+
+
 // HEADER
 .port-navbar.port-default {
     width: 100%;
     z-index: 15;
     padding: 40px;
+
+  &.absolute {
+    position: absolute;
+  }
 
     &.nav-dark {
       background-color: #333;
@@ -10,20 +19,20 @@
 
     }
 
-    &.with-bg-blue {
+    &.base-page-nav.with-bg-blue {
       background-image: linear-gradient(45deg,#00aeef 0%,#096fb9 100%);
       padding:30px;
     }
 
-    &.with-bg-orange {
+    &.base-page-nav.with-bg-orange {
       background-image: linear-gradient(45deg, rgb(254, 202, 83), rgb(253, 157, 97));
       padding:30px;
     }
 
     .port-navbar {
-        &a.nav-link.port-navbar-link.active {
-          color: #dba919;
-        }
+        //&a.nav-link.port-navbar-link.active {
+        //  color: #dba919;
+        //}
       &-brand {
         color: white;
         font-size: 24px;

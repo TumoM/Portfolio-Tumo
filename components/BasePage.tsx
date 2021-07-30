@@ -24,7 +24,7 @@ const BasePage: React.FC<PostProps> = (props) => {
 
   const {
       className = "",
-      indexPage=null,
+      indexPage=false,
       children,
       header,
       canonicalPath,
