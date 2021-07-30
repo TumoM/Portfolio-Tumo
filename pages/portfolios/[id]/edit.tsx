@@ -63,6 +63,7 @@ const PortfolioEdit = ({user:userAdmin}) => {
         <BaseLayout user={user} loading={isLoading}>
             <BasePage
                 header="Portfolio Edit"
+                title={'Edit Portfolio - Tumo Masire'}
             >
                 { isLoading &&
                 <div className="text-center">

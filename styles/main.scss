@@ -1,4 +1,4 @@
-@import "/styles/shared/fonts";
+//@import "/styles/shared/fonts";
 
 // Components
 @import "./components/header";
@@ -29,7 +29,7 @@ html, body {
 }
 
 .base-page {
-  padding-top: 100px;
+  padding-top: 5vh;
   color: black;
   background-color: #ecedee;
   min-height: 100vh;

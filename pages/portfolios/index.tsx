@@ -112,7 +112,13 @@ const Portfolios = ({portfolios:initialPortfolios}) =>  {
       user={user}
       loading={isLoading}
     >
-      <BasePage header="Portfolios" className="portfolio-page d-flex align-items-start">
+      <BasePage
+        title="Newest Portfolios - Tumo Masire"
+        header="Portfolios"
+        className="portfolio-page d-flex align-items-start"
+        metaDescription={"Overview of portfolio job position's held by Tumo Masire"}
+      >
+
         { isLoading &&
           <div className="text-center">
             <MyLoading size='3.5rem'/>

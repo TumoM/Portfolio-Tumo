@@ -5,14 +5,18 @@ import BasePage from 'components/BasePage'
 import { useUser } from '@auth0/nextjs-auth0';
 import {Col, Row} from 'reactstrap';
 
-
+declare global {
+  interface Window {
+    __isAboutLoaded:boolean;
+  }
+}
 const About = () =>  {
   const { user, error, isLoading } = useUser();
 
   useEffect(() => {
     return () => {
       // @ts-ignore
-      (window).__isAboutLoaded = true
+      window.__isAboutLoaded = true
     }
   })
 
@@ -24,7 +28,10 @@ const About = () =>  {
   }
   return (
     <BaseLayout user={user} loading={isLoading}>
-      <BasePage className={'about-page'}>
+      <BasePage
+        className={'about-page'}
+        title="About Me - Tumo Masire"
+      >
         <Row className="mt-5">
           <Col md="6">
             <div className="left-side">

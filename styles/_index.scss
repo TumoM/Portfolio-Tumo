@@ -30,6 +30,9 @@
   transform: rotateY(180deg);
 }
 
+div.hero-section-content > div.hero-section-content-intro {
+  font-size: 18px;
+}
 
 .cover {
     background-image: linear-gradient(45deg,#00aeef 0%,#096fb9 100%);

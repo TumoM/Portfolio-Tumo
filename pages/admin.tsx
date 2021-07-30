@@ -5,7 +5,9 @@ import withAuth from 'hoc/withAuth';
 const OnlyAdmin = ({user, loading}) => {
   return (
     <BaseLayout user={user} loading={loading}>
-      <BasePage>
+      <BasePage
+        title="Admin - Tumo Masire"
+      >
       <h1>I am Admin Page - Hello {user.name}</h1>
       </BasePage>
     </BaseLayout>

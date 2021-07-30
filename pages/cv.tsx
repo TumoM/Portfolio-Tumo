@@ -9,9 +9,12 @@ const Cv = () =>  {
 
   return (
     <BaseLayout user={user} loading={isLoading}>
-        <BasePage header={"Tumo's CV"}>
+        <BasePage
+          header={"Tumo's CV"}
+          title="My Experiences - Tumo Masire"
+        >
           <Row>
-            <Col md={{size: 8, offset: 2}}>
+            <Col className={'mx-auto'} md={{size: 9, offset: 1.5}}>
               <iframe style={{width: '100%', height: '800px'}} src="/tumo_cv.pdf"/>
             </Col>
           </Row>

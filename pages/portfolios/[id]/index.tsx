@@ -25,6 +25,8 @@ const PortfolioDetail = ({ portfolio }):JSX.Element => {
         <BaseLayout user={user} loading={isLoading}>
             <BasePage
                 header="Portfolio Detail"
+                title={`${portfolio? portfolio.title : "Portfolio"} - Tumo Masire`}
+                metaDescription={"Information about a portfolio job position held by Tumo Masire - "+portfolio.description.substr(0,150)}
             >
                 { isLoading &&
                 <div className="text-center">
