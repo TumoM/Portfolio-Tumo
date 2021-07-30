@@ -15,7 +15,7 @@ const Cv = () =>  {
         >
           <Row>
             <Col className={'mx-auto'} md={{size: 9, offset: 1.5}}>
-              <iframe style={{width: '100%', height: '800px'}} src="/tumo_cv.pdf"/>
+              <iframe style={{width: '100%', height: '800px'}} src="/tumo_cv_2021.pdf"/>
             </Col>
           </Row>
         </BasePage>
