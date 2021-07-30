@@ -66,10 +66,12 @@ const Header = ({user=null, loading=false, className = ""}) => {
                         <AdminMenu name={user.given_name || user.name}/>
                       {/*<BsNavLink href="/profile" title={user.given_name || user.name}/>*/}
                     </NavItem>
-                    <NavItem className="port-navbar-item">
-                      <LogoutLink/>
-                    </NavItem>
                   </>
+                }
+                { user &&
+                <NavItem className="port-navbar-item">
+                    <LogoutLink/>
+                </NavItem>
                 }
                 { !user &&
                   <NavItem className="port-navbar-item">
