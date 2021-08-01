@@ -37,3 +37,5 @@ yarn-error.log*
 /.idea/
 assignments.txt
 **/config/dev.js
+**/debug.log
+public/favicon.ico.bac

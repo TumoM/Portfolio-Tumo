@@ -14,7 +14,7 @@ const Index = () => {
   const { user, error, isLoading } = useUser();
   const [isFlipping, setIsFlipping ] = useState(false)
   const flipInterval = useRef();
-
+  console.log("Vercel URL:",process?.env?.VERCEL_URL||null)
   useEffect(() => {
     startAnimation()
     return () => {

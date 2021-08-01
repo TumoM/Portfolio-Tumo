@@ -16,9 +16,16 @@ export interface IPortfolio {
 }
 
 export function createPortfolio(data:IPortfolio) {
-  const res = axios.post('/api/v1/portfolios', data);
-  console.log("Made createPortfolio Post call");
-  return res
+  try {
+    const res = axios.post('/api/v1/portfolios', data);
+    console.log("Made createPortfolio Post call");
+    console.log("RES:", res);
+    return res
+  } catch (err) {
+    console.log("Error creating profile", err);
+    
+    return err;
+  }
 }
 
 export function updatePortfolio(id:string|number,data:IPortfolio) {
