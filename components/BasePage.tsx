@@ -44,6 +44,7 @@ const BasePage: React.FC<PostProps> = (props) => {
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <meta name="description" key="description" content={metaDescription.substring(0,200)}/>
           <meta name="title" key="title" content={title}/>
+          <meta name="charset" key="charset" content={"utf-8"}/>
           <meta property="og:title" key="og:title" content={title} />
           <meta property="og:locale" key="og:locale" content="en_GB"/>
           <meta property="og:locale:alternate" content="en-ZA" />
