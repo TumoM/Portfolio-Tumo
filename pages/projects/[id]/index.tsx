@@ -22,7 +22,7 @@ const ProjectDetail = ({ project }):JSX.Element => {
 
 
   return (
-    <BaseLayout navClass="transparent" user={user} loading={isLoading}>
+    <BaseLayout navClass="transparent" linkColor='black' user={user} loading={isLoading}>
       <BasePage
         // header="Project Detail"
         noWrapper

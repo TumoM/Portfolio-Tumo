@@ -2,6 +2,30 @@ nav.port-navbar {
 
 }
 
+.black {
+  color: black;
+
+  &.port-navbar.port-default {
+    .navbar-brand.port-navbar-brand{
+      color: black;
+    }
+  }
+  // a.port-navbar.port-default a.port-navbar-brand {
+  //   color: black;
+  // }
+  a.port-navbar {
+    &-link.nav-link{
+      color: black;
+  }
+  }
+}
+.white {
+  a.port-navbar {
+    &-link.nav-link{
+      color: white;
+  }
+  }
+}
 
 // HEADER
 .port-navbar.port-default {
@@ -47,7 +71,7 @@ nav.port-navbar {
       }
 
       &-link.nav-link{
-        color: white;
+        // color: white;
         font-weight: bold;
         letter-spacing: 0.8px;
         font-size: 18px;

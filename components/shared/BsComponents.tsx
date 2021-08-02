@@ -17,9 +17,9 @@ export const BsNavLink: React.FC<PostProps> = props => {
   )
 }
 
-export const BsNavBrand = () =>
+export const BsNavBrand = ({linkColor="white"}) =>
   <Link href="/">
-    <a className="navbar-brand port-navbar-brand">Tumo Masire</a>
+    <a className={`navbar-brand port-navbar-brand`}>Tumo Masire</a>
   </Link>
 
 export default BsNavLink;
