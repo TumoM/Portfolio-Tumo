@@ -29,7 +29,7 @@ const BasePage: React.FC<PostProps> = (props) => {
       header,
       canonicalPath,
       noWrapper,
-      title = "Portfolio - Tumo Masire",
+      title = "Tumo Masire",
       metaDescription="My name is Tumo Masire and I am an experienced software engineer, web developer, and freelance " +
         "developer. Throughout my career, I have acquired a wide breadth of technical knowledge and the ability to explain programming topics clearly and in detail to a broad audience.",
     } = props;
