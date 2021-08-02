@@ -46,7 +46,7 @@ const About = () =>  {
               <p>
                 I have a Bachelor&apos;s degree in Economics and Computer Science, in addition to multiple online courses completed
                 and several years of experience working on a wide range of technologies and projects from web applications in React and Express,
-                Electron, Ionic, Python Web Scrapers and Automation tools, and Java FX Application
+                Electron, Ionic, Python Web Scrapers and Automation tools, and Java FX Applications.
               </p>
               <p>
                 Throughout my career, I have strived to acquire advanced technical knowledge and the ability to explain

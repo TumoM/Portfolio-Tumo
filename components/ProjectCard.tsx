@@ -1,6 +1,6 @@
 // import { Card, CardHeader, CardBody, CardText, CardTitle } from 'reactstrap';
 // import React from "react";
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -28,28 +28,32 @@ const descriptionLength = 150;
 //     </CardBody>
 //   </Card>
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
+    marginBottom: 20,
   },
   media: {
-    height: 140,
+    height: 200,
   },
   chip: {
     margin: theme.spacing(0.5),
   },
-});
+}));
 
 const ProjectCard = ({project, children}) => {
   const classes = useStyles();
+  console.log("TAGS:",project.tags);
+  
+  const [chipData, setChipData] = useState(project?.tags)
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root+ ' mx-auto'}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
           image={project.thumbnail}
-          title="Contemplative Reptile"
+          title="Project Thumbnail"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
@@ -62,14 +66,23 @@ const ProjectCard = ({project, children}) => {
       </CardActionArea>
       <Divider/>
       <CardActions>
-      <div>
-          <Chip className={classes.chip} label="Extra Soft" />
-          <Chip className={classes.chip} color="primary" label="Soft" />
-          <Chip className={classes.chip} label="Medium" />
-          <Chip className={classes.chip} label="Hard" />
-        </div>
+      {chipData.map((data, i) => {
+        if (data.trim().length > 0) {
+          return (
+            <Chip
+              key={i}
+              label={data}
+              size="small"
+              className={classes.chip}
+            />
+        );
+        }
+       
+      })}
       </CardActions>
-      <div className='mb-2 ml-2'>
+      <Divider/>
+
+      <div className='my-2 ml-2'>
         {children}
       </div>
     </Card>

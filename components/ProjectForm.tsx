@@ -22,6 +22,7 @@ const ProjectForm = ({onSubmit, loadingData=false,buttonText="Create", initialDa
 
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
+    const [tags, setTags] = useState("")
     const [disableEndDate, setDisableEndDate] = useState(false)
 
 /*
@@ -65,10 +66,21 @@ const ProjectForm = ({onSubmit, loadingData=false,buttonText="Create", initialDa
         register('endDate');
     },[register])
 
+    const handleSubmitProcess = (e) => {
+        if (e.tags != undefined) {
+            try{
+                e.tags = e.tags.split(/,\s*/).map(item => item.trim())
+            }
+            catch{null}
+        }
+        onSubmit(e)
+        // alert(JSON.stringify(e,null,2))
+    }
+
     // @ts-ignore
     // @ts-ignore
     return (
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit(handleSubmitProcess)}>
             <FormGroup>
                 <Label htmlFor="title">Title</Label>
                 <Input
@@ -124,7 +136,7 @@ const ProjectForm = ({onSubmit, loadingData=false,buttonText="Create", initialDa
                 <Input
                 name="tags"
                 type="text"
-                defaultValue={initialData?.data?.tags }
+                defaultValue={initialData?.data?.tags.join(", ").trim() }
                 placeholder="Frontend, Backend, Express, MongoDB"
                 {...register("tags")}
 
