@@ -7,11 +7,17 @@ import ProjectForm from 'components/ProjectForm'
 const Blogs = () =>  {
   const { user, error, isLoading } = useUser();
 
+  const handleSubmit = (e) => {
+      if (window !== undefined) {
+        alert(JSON.stringify(e,null,2))
+      }
+  }
+
   return (
     <BaseLayout user={user} loading={isLoading}>
-      <BasePage>
-        <h1>I am Temp page</h1>
-        <ProjectForm onSubmit={()=>null}/>
+      <BasePage >
+        <h1 >I am Temp page</h1>
+        <ProjectForm onSubmit={handleSubmit}/>
       </BasePage>
     </BaseLayout>
   )

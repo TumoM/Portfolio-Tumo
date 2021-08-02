@@ -16,7 +16,7 @@ interface IProps {
     initialData?: any,
 }
 const ProjectForm = ({onSubmit, loadingData=false,buttonText="Create", initialData = null}:IProps) => {
-    const { width } = useWindowDimensions();
+    // const { width } = useWindowDimensions(); // Causing an error?
     // const { register, handleSubmit, setValue, reset } = useForm({defaultValues:initialData.data});
     const { register, handleSubmit, setValue } = useForm({defaultValues: initialData?.data});
 
@@ -132,15 +132,26 @@ const ProjectForm = ({onSubmit, loadingData=false,buttonText="Create", initialDa
             </FormGroup>
 
             <FormGroup>
-                <Label htmlFor="jobTitle">Job Title</Label>
+                <Label htmlFor="imageCaptions">Images URL(s)</Label>
                 <Input
-                name="jobTitle"
-                type="text"
-                defaultValue={ initialData?.data?.jobTitle }
+                name="imageCaptions"
+                type="textarea"
+                defaultValue={ initialData?.data?.imageCaptions }
                 placeholder="Web Developer"
-                {...register("jobTitle")}
+                {...register("imageCaptions")}
 
-                id="jobTitle"/>
+                id="imageCaptions"/>
+            </FormGroup>
+            <FormGroup>
+                <Label htmlFor="imageCaptions">Images Caption(s)</Label>
+                <Input
+                name="imageCaptions"
+                type="textarea"
+                defaultValue={ initialData?.data?.imageCaptions }
+                placeholder="Web Developer"
+                {...register("imageCaptions")}
+
+                id="imageCaptions"/>
             </FormGroup>
 
             <FormGroup>
@@ -166,7 +177,7 @@ const ProjectForm = ({onSubmit, loadingData=false,buttonText="Create", initialDa
                         dateFormat="dd/MM/yyyy"
                         allowSameDay = {false}
                         endDate={new Date()}
-                        scrollableYearDropdown={width<=576?true:false}
+                        // scrollableYearDropdown={width<=576?true:false}
                         selected={endDate}
                         disabled={disableEndDate}
                         selectsEnd={true}
@@ -192,7 +203,7 @@ const ProjectForm = ({onSubmit, loadingData=false,buttonText="Create", initialDa
             </div>
             <Button
                 type="submit"
-                className=""
+                className={'mb-3'}
                 color="primary"
                 disabled={loadingData}
                 >
