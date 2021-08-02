@@ -9,7 +9,7 @@ import { Input, Label } from 'reactstrap';
 
 const Dashboard = ({ user, loading}) =>  {
   // const { user, error, isLoading } = useUser();
-  const {text, setText} = useState("");
+  const [text, setText] = useState("");
   const handleChange = (event) => {
 
     console.log(event.target.value)
