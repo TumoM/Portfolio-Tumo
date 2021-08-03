@@ -73,6 +73,12 @@ const ProjectForm = ({onSubmit, loadingData=false,buttonText="Create", initialDa
             }
             catch{null}
         }
+        if (e.technologies != undefined) {
+            try{
+                e.technologies = e.technologies.split(/\n/).map(item => item.trim())
+            }
+            catch{null}
+        }
         onSubmit(e)
         // alert(JSON.stringify(e,null,2))
     }
@@ -116,6 +122,19 @@ const ProjectForm = ({onSubmit, loadingData=false,buttonText="Create", initialDa
                 {...register("description")}
 
                 id="description">
+                </Input>
+            </FormGroup>
+            <FormGroup>
+                <Label htmlFor="technologies">Technologies</Label>
+                <Input
+                name="technologies"
+                rows="5"
+                type="textarea"
+                defaultValue={ initialData?.data?.technologies.join('\n') }
+                placeholder="This project is about XYZ..."
+                {...register("technologies")}
+
+                id="technologies">
                 </Input>
             </FormGroup>
 

@@ -1,6 +1,6 @@
 // import { Card, CardHeader, CardBody, CardText, CardTitle } from 'reactstrap';
 // import React from "react";
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import moment from "moment";
 import Divider from '@material-ui/core/Divider';
 import Chip from '@material-ui/core/Chip';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const descriptionLength = 150;
 // const ProjectCard2 = ({project, children}) =>
@@ -27,11 +28,19 @@ const descriptionLength = 150;
 //       {children}
 //     </CardBody>
 //   </Card>
+const imageOptions = {
+  height:345,
+  alt: 'Project Thumbnail',
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    maxWidth: imageOptions.height,
     marginBottom: 20,
+  },
+  box: {
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   media: {
     height: 200,
@@ -41,20 +50,39 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
 const ProjectCard = ({project, children}) => {
   const classes = useStyles();
   console.log("TAGS:",project.tags);
-  
+  const placeholderRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState<boolean>(false);
   const [chipData, setChipData] = useState(project?.tags)
 
+  useEffect(() => {
+    if (!visible && placeholderRef.current) {
+      const observer = new IntersectionObserver(([{ intersectionRatio }]) => {
+        if (intersectionRatio > 0) {
+          setVisible(true);
+        }
+      });
+      observer.observe(placeholderRef.current);
+      return () => observer.disconnect();
+    }
+  }, [visible, placeholderRef]);
+
   return (
-    <Card className={classes.root+ ' mx-auto'}>
+    <Card className={classes.root+ ' mx-auto project-card'}>
       <CardActionArea>
-        <CardMedia
+      {visible
+      ? <CardMedia
           className={classes.media}
           image={project.thumbnail}
           title="Project Thumbnail"
-        />
+        /> : 
+        <div className={classes.box}style={{height: imageOptions.height, backgroundColor: '#e2e2e2', display: 'flex'}} aria-label={imageOptions.alt} ref={placeholderRef}>
+          <CircularProgress color="primary" />
+        </div>}
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
           {project.title}

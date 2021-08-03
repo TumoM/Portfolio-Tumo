@@ -9,10 +9,14 @@ nav.port-navbar {
     .navbar-brand.port-navbar-brand{
       color: black;
     }
+
+    .port-dropdown-toggle.dropdown-toggle.nav-link {
+      color: black;
+    }
   }
-  // a.port-navbar.port-default a.port-navbar-brand {
-  //   color: black;
-  // }
+  a.port-navbar.port-default a.port-navbar-brand {
+    color: black;
+  }
   a.port-navbar {
     &-link.nav-link{
       color: black;
