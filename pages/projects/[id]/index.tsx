@@ -8,7 +8,10 @@ import { Spinner } from "reactstrap";
 import { useUser } from '@auth0/nextjs-auth0';
 import ProjectApi from 'lib/api/projects';
 import MyLoading from "components/shared/MyLoading";
-import moment from "moment"
+import moment from "moment";
+import Image from 'next/image'
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 
 interface Project {
   body: string;
@@ -39,13 +42,53 @@ const ProjectDetail = ({ project }):JSX.Element => {
         <div className="project-detail">
             <div className="cover-container d-flex h-100 p-3 mx-auto flex-column">
                 <main role="main" className="inner page-cover">
-                    <h1 className="cover-heading">{project.title}</h1>
-                    <p className="lead dates">{moment(project.startDate).format('MMMM, YYYY')} - {project.endDate ? moment(project.endDate).format('MMMM, YYYY') : "Current"}</p>
-                    <p className="lead info mb-0">{project.jobTitle} | {project.company} | {project.location}</p>
-                    <p className="lead">{project.description}</p>
-                    <p className="lead">
-                      {project && project.companyWebsite && <a target="_" href={project.companyWebsite} className="btn btn-lg btn-secondary">Visit Company</a>}
-                    </p>
+                  <Grid 
+                    style={{paddingLeft:"100px",paddingRight:"100px", marginBottom:"20px"}}
+                    container 
+                    direction="column"
+                    justifyContent="flex-start"
+                    alignItems="flex-start">
+                    <Grid item xs={10} className={'mb-4'}>
+                      <Image layout={'intrinsic'} src={project.thumbnail} alt='Project Thumbnail' height={337.5} width={600} />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Typography className={'mb-0'} style={{ fontWeight: 'bold' }} variant="h3" component="h2">
+                        {project.title}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Typography className={'mb-3'}  variant="subtitle1" gutterBottom>
+                        {moment(project.startDate).format('MMMM, YYYY')} 
+                      </Typography>
+                    </Grid>
+                    <Grid className={'mb-4'} item xs={12}>
+                      <Typography variant="body1" gutterBottom>
+                      {project.description}
+                      </Typography>
+                    </Grid>
+                    <Grid className={'mb-2'} item xs={12}>
+                      <Typography className={'mb-0'} style={{ fontWeight: 'bold' }} variant="h4" component="h3">
+                        Technologies:
+                      </Typography>
+                      <ul>
+                        {project.technologies.map((tech,i)=> <li style={{fontSize: "1.4rem"}} key={i}>{tech}</li>)}
+                      </ul>
+                    </Grid>
+                    <Grid className={'mb-4'} item xs={12}>
+                      <Typography className={'mb-2'} style={{ fontWeight: 'bold' }} variant="h4" component="h3">
+                        Screenshots:
+                      </Typography>
+                        {project.images.map((image,i)=> {
+                          return (
+                            <div className={'mb-5'} key={i}>
+                              <Typography className={'mb-2'} style={{ fontWeight: 'bold' }} variant="subtitle1" gutterBottom >
+                                {image.caption}
+                              </Typography>
+                              <Image layout={'intrinsic'} src={project.thumbnail} alt='Project Thumbnail' height={337.5} width={600} />
+                            </div>)
+                        })}
+                    </Grid>
+                  </Grid>
                 </main>
             </div>
         </div>
