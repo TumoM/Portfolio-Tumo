@@ -47,14 +47,14 @@ const Header = ({user=null, loading=false, className = "", linkColor="white"}) =
               <BsNavLink href="/about" title="About"/>
             </NavItem>
             <NavItem className="port-navbar-item">
-              <BsNavLink href="/portfolios" title="Portfolios"/>
-            </NavItem>
-            <NavItem className="port-navbar-item">
               <BsNavLink href="/projects" title="Projects"/>
             </NavItem>
             <NavItem className="port-navbar-item">
-              <BsNavLink href="/blogs" title="Blogs"/>
+              <BsNavLink href="/portfolios" title="Portfolios"/>
             </NavItem>
+            {/* <NavItem className="port-navbar-item">
+              <BsNavLink href="/blogs" title="Blogs"/>
+            </NavItem> */}
             <NavItem className="port-navbar-item">
               <BsNavLink href="/cv" title="Cv"/>
             </NavItem>

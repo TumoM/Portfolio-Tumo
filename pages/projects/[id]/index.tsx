@@ -20,10 +20,11 @@ interface Project {
   userId: number;
 }
 
+
+
 const ProjectDetail = ({ project }):JSX.Element => {
   const { user, error, isLoading } = useUser();
-
-
+  
   return (
     <BaseLayout navClass="transparent" linkColor='black' user={user} loading={isLoading}>
       <BasePage
@@ -43,7 +44,7 @@ const ProjectDetail = ({ project }):JSX.Element => {
             <div className="cover-container d-flex h-100 p-3 mx-auto flex-column">
                 <main role="main" className="inner page-cover">
                   <Grid 
-                    style={{paddingLeft:"100px",paddingRight:"100px", marginBottom:"20px"}}
+                    style={{paddingLeft:"10vw",paddingRight:"15vw", marginBottom:"20px", marginTop:"120px"}}
                     container 
                     direction="column"
                     justifyContent="flex-start"
@@ -52,7 +53,7 @@ const ProjectDetail = ({ project }):JSX.Element => {
                       <Image layout={'intrinsic'} src={project.thumbnail} alt='Project Thumbnail' height={337.5} width={600} />
                     </Grid>
                     <Grid item xs={12}>
-                      <Typography className={'mb-0'} style={{ fontWeight: 'bold' }} variant="h3" component="h2">
+                      <Typography className={'mb-0'} style={{ fontWeight: 'bold' }} variant="h4" component="h2">
                         {project.title}
                       </Typography>
                     </Grid>
@@ -62,20 +63,20 @@ const ProjectDetail = ({ project }):JSX.Element => {
                       </Typography>
                     </Grid>
                     <Grid className={'mb-4'} item xs={12}>
-                      <Typography variant="body1" gutterBottom>
+                      <Typography variant="body1" style={{whiteSpace: 'pre-line'}} gutterBottom>
                       {project.description}
                       </Typography>
                     </Grid>
                     <Grid className={'mb-2'} item xs={12}>
-                      <Typography className={'mb-0'} style={{ fontWeight: 'bold' }} variant="h4" component="h3">
+                      <Typography className={'mb-0'} style={{ fontWeight: 'bold' }} variant="h5" component="h3">
                         Technologies:
                       </Typography>
                       <ul>
-                        {project.technologies.map((tech,i)=> <li style={{fontSize: "1.4rem"}} key={i}>{tech}</li>)}
+                        {project.technologies.map((tech,i)=> <li style={{fontSize: "1.15rem"}} key={i}>{tech}</li>)}
                       </ul>
                     </Grid>
                     <Grid className={'mb-4'} item xs={12}>
-                      <Typography className={'mb-2'} style={{ fontWeight: 'bold' }} variant="h4" component="h3">
+                      <Typography className={'mb-2'} style={{ fontWeight: 'bold' }} variant="h5" component="h3">
                         Screenshots:
                       </Typography>
                         {project.images.map((image,i)=> {
