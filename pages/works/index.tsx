@@ -6,11 +6,11 @@ import Link from "next/link";
 import BasePage from 'components/BasePage';
 import {Button, ButtonGroup, Col, Row, Spinner} from 'reactstrap';
 import { useUser } from '@auth0/nextjs-auth0';
-import PortfolioApi from 'lib/api/portfolios';
-import PortfolioCard from "components/PortfolioCard";
+import WorkApi from 'lib/api/works';
+import WorkCard from "components/WorkCard";
 import MyLoading from 'components/shared/MyLoading';
 import { isAuthorized } from 'utils/auth0';
-import { useDeletePortfolio } from 'helpers/portfolios';
+import { useDeleteWork } from 'helpers/works';
 import {toast} from "react-toastify";
 
 interface Props {
@@ -19,27 +19,27 @@ interface Props {
 
 
 
-const Portfolios = ({portfolios:initialPortfolios}) =>  {
+const Works = ({works:initialWorks}) =>  {
   const { user, error, isLoading } = useUser();
   const router = useRouter()
-  const [portfolios, setPortfolios] = useState(initialPortfolios)
+  const [works, setWorks] = useState(initialWorks)
   // @ts-ignore
-  const [ deletePortfolio, {data, error:deleteError, laoding} ] = useDeletePortfolio()
+  const [ deleteWork, {data, error:deleteError, laoding} ] = useDeleteWork()
 
-  const _deletePortfolio = (e, id) => {
+  const _deleteWork = (e, id) => {
     e.stopPropagation
     const isConfirm = confirm("Are you sure you want to delete?")
     if (isConfirm === true){
       // @ts-ignore
-      deletePortfolio(id)
+      deleteWork(id)
         .then(r => {
-          const tempPortfolios = portfolios.filter((portfolio => {
-            if (portfolio._id !== id) {
+          const tempWorks = works.filter((work => {
+            if (work._id !== id) {
               return true;
             }
             return false
           }))
-          setPortfolios(tempPortfolios)
+          setWorks(tempWorks)
           toast.success('Delete Successful', {
             position: "bottom-center",
             autoClose: 3000,
@@ -64,15 +64,15 @@ const Portfolios = ({portfolios:initialPortfolios}) =>  {
     }
   }
 
-  const renderPortfolios = (portfolios) => {
-    if (portfolios){
-      return portfolios.map((portfolio:any) => {
+  const renderWorks = (works) => {
+    if (works){
+      return works.map((work:any) => {
         return (
           <Col onClick={() => {
-              router.push(`/portfolios/[id]`,`/portfolios/${portfolio?._id}`)
+              router.push(`/works/[id]`,`/works/${work?._id}`)
             }}
-            key={portfolio?._id} ms="4" md="4">
-            <PortfolioCard  portfolio={portfolio}>
+            key={work?._id} ms="4" md="4">
+            <WorkCard  work={work}>
               { user && isAuthorized(user,'admin') &&
                 <>
                   <Button
@@ -80,7 +80,7 @@ const Portfolios = ({portfolios:initialPortfolios}) =>  {
                     className={'mr-3'}
                     onClick={(e) => {
                       e.stopPropagation();
-                      router.push(`/portfolios/[id]/edit`,`/portfolios/${portfolio?._id}/edit`)
+                      router.push(`/works/[id]/edit`,`/works/${work?._id}/edit`)
                     }}
                   >
                     Edit
@@ -90,14 +90,14 @@ const Portfolios = ({portfolios:initialPortfolios}) =>  {
                     color={'danger'}
                     onClick={e => {
                       e.stopPropagation();
-                      _deletePortfolio(e, portfolio._id)
+                      _deleteWork(e, work._id)
                     }}
                   >
                     Delete
                   </Button>
                 </>
               }
-            </PortfolioCard>
+            </WorkCard>
           </Col>
 
         )
@@ -112,10 +112,10 @@ const Portfolios = ({portfolios:initialPortfolios}) =>  {
       loading={isLoading}
     >
       <BasePage
-        title="Newest Portfolios - Tumo Masire"
-        header="Portfolios"
-        className="portfolio-page d-flex align-items-start"
-        metaDescription={"Overview of portfolio job position's held by Tumo Masire"}
+        title="Newest Works - Tumo Masire"
+        header="Works"
+        className="work-page d-flex align-items-start"
+        metaDescription={"Overview of work job position's held by Tumo Masire"}
       >
 
         { isLoading &&
@@ -123,10 +123,10 @@ const Portfolios = ({portfolios:initialPortfolios}) =>  {
             <MyLoading size='3.5rem'/>
           </div>
         }
-        {portfolios &&
+        {works &&
           <Row>
             {
-              renderPortfolios(portfolios)
+              renderWorks(works)
             }
           </Row>
 
@@ -139,16 +139,16 @@ const Portfolios = ({portfolios:initialPortfolios}) =>  {
   )
 }
 
-// Get portfolios data at build time
+// Get works data at build time
 export async function getStaticProps() {
   console.log("Calling GetAll");
-  const json = await new PortfolioApi().getAll();
+  const json = await new WorkApi().getAll();
   console.log("Called GetAll");
-  const portfolios = json.data;
+  const works = json.data;
   return {
-    props: { portfolios: portfolios},
+    props: { works: works},
     revalidate: 1
   }
 }
 
-export default Portfolios
+export default Works

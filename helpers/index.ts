@@ -1,7 +1,7 @@
 import axios from "axios";
 import useSWR from 'swr'
 import {useState} from "react";
-import {createPortfolio} from "./portfolios";
+import {createWork} from "./works";
 
 export const myFetcher = (url:string) => {
   return axios.get(url).then(res=>res.data).catch(e=>Promise.reject(e))

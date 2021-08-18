@@ -56,7 +56,7 @@ const Index = () => {
                       <div className="hero-section-content">
                         <h2> Full Stack Web Developer </h2>
                         <div className="hero-section-content-intro">
-                          Have a look at my portfolio and job history.
+                          Have a look at my work and job history.
                         </div>
                       </div>
                       <Image width="464" height="580" className="image" alt="Avatar by a laptop" src="/images/section-1.jpg"/>
@@ -68,7 +68,7 @@ const Index = () => {
                       <div className="hero-section-content">
                         <h2> Full Stack Web Developer </h2>
                         <div className="hero-section-content-intro">
-                          Have a look at my portfolio and job history.
+                          Have a look at my work and job history.
                         </div>
                       </div>
                       <Image width="464" height="580" className="image" alt="Avatar by a laptop" src="/images/section-2.jpg"/>
@@ -82,7 +82,7 @@ const Index = () => {
               <Col md="5" className="ml-2 hero-welcome-wrapper">
                 <div className="hero-welcome-text">
                   <h1>
-                    Welcome to the portfolio website of Tumo Masire.
+                    Welcome to the work website of Tumo Masire.
                     Get informed, collaborate and discover projects I have worked on on through the years!
                   </h1>
                 </div>

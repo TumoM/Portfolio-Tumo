@@ -1,20 +1,20 @@
-.portfolio-page {
+.work-page {
     min-height: 100vh;
     padding: 150px 0 0;
     // background-color: white;
 
-    .portfolio-card {
+    .work-card {
       background-image: linear-gradient(45deg, #4e54c8 0%, #8f94fb 100%);
       border: none;
       color: white;
       transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s;
       margin-bottom: 20px;
 
-      .portfolio-card-city{
+      .work-card-city{
         margin-bottom:0;
       }
 
-      .portfolio-card-dates{
+      .work-card-dates{
         margin-bottom:1rem;
       }
       &:hover {

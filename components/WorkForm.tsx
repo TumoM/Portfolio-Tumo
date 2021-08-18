@@ -4,10 +4,10 @@ import DatePicker from "react-datepicker";
 import { useForm, Controller } from "react-hook-form"
 import axios from "axios";
 import {reset} from "colorette";
-import {IPortfolio} from "../helpers/portfolios";
+import {IWork} from "../helpers/works";
 
 interface IInitialData {
-    data: {IPortfolio}|IPortfolio
+    data: {IWork}|IWork
 }
 
 interface IProps {
@@ -16,7 +16,7 @@ interface IProps {
     buttonText?: string,
     initialData?: any,
 }
-const PortfolioForm = ({onSubmit, loadingData=false,buttonText="Create", initialData = null}:IProps) => {
+const WorkForm = ({onSubmit, loadingData=false,buttonText="Create", initialData = null}:IProps) => {
     const { width } = useWindowDimensions();
     // const { register, handleSubmit, setValue, reset } = useForm({defaultValues:initialData.data});
     const { register, handleSubmit, setValue } = useForm({defaultValues: initialData?.data});
@@ -230,7 +230,7 @@ function useWindowDimensions() {
     return windowDimensions;
   }
 
-export default PortfolioForm;
+export default WorkForm;
 
 
 

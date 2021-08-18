@@ -6,26 +6,26 @@ import React from 'react'
 import BasePage from 'components/BasePage'
 import { useUser } from '@auth0/nextjs-auth0';
 import withAuth from 'hoc/withAuth'
-import PortfolioForm from 'components/PortfolioForm';
+import WorkForm from 'components/WorkForm';
 import { Row, Col } from 'reactstrap';
 import axios from 'axios';
-import PortfolioApi from 'lib/api/portfolios'
+import WorkApi from 'lib/api/works'
 import { getAccessToken } from '@auth0/nextjs-auth0';
-import { useCreatePortfolio } from 'helpers/portfolios';
+import { useCreateWork } from 'helpers/works';
 import Redirect from 'components/shared/redirect';
 
-const PortfolioNew = ({user, loading:loadingProp}) =>  {
+const WorkNew = ({user, loading:loadingProp}) =>  {
 //   const { user, error, isLoading } = useUser();
 // @ts-ignore
-    const [createPortfolio, {data, loading, error}] = useCreatePortfolio();
+    const [createWork, {data, loading, error}] = useCreateWork();
 
-if (data) {return  <Redirect to="/portfolios" />}
+if (data) {return  <Redirect to="/works" />}
   return (
     <BaseLayout user={user} loading={loadingProp}>
-      <BasePage header="Create Portfolio">
+      <BasePage header="Create Work">
         <Row>
             <Col md="8" className="mx-auto">
-                <PortfolioForm onSubmit={createPortfolio}/>
+                <WorkForm onSubmit={createWork}/>
                 {error && <div className="alert alert-danger mt-3">{error}</div>}
             </Col>
         </Row>
@@ -34,4 +34,4 @@ if (data) {return  <Redirect to="/portfolios" />}
   )
 }
 
-export default withAuth(PortfolioNew)('admin')
+export default withAuth(WorkNew)('admin')

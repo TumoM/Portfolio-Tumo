@@ -18,8 +18,8 @@ const AdminMenu = ({name}:{name:string}) => {
         <DropdownItem>
           <BsNavLink
             className="port-dropdown-item"
-            href="/portfolios/new"
-            title="Create Portfolio"
+            href="/works/new"
+            title="Create Work"
           />
         </DropdownItem>
         <DropdownItem>

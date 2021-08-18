@@ -7,32 +7,32 @@ import React from "react";
 import MyLoading from "components/shared/MyLoading";
 import {useUser} from "@auth0/nextjs-auth0";
 import withAuth from "hoc/withAuth";
-import {useGetPortfolio, useUpdatePortfolio} from "helpers/portfolios"
-import PortfolioForm from "components/PortfolioForm";
+import {useGetWork, useUpdateWork} from "helpers/works"
+import WorkForm from "components/WorkForm";
 import { toast } from 'react-toastify';
-interface Portfolio {
+interface Work {
     body: string;
     id: number;
     title: string;
     userId: number;
 }
 
-const PortfolioEdit = ({user:userAdmin}) => {
+const WorkEdit = ({user:userAdmin}) => {
     const { user:userAuthO, error, isLoading } = useUser();
     const router = useRouter();
-    const portfolio = useGetPortfolio(router.query.id)
+    const work = useGetWork(router.query.id)
     // @ts-ignore
-    const [ updatePortfolio, {error:updateError, loading}] = useUpdatePortfolio();
+    const [ updateWork, {error:updateError, loading}] = useUpdateWork();
     let user = userAuthO || userAdmin;
 
-    const _updatePortfolio = async (data) => {
-        console.log("In _updateportfolio")
+    const _updateWork = async (data) => {
+        console.log("In _updatework")
         try{
             // @ts-ignore
-            updatePortfolio(router.query.id, data)
+            updateWork(router.query.id, data)
                 .then(r => {
                     console.log("R:",r)
-                    toast.success(`Portfolio Updated`, {
+                    toast.success(`Work Updated`, {
                         position: "bottom-center",
                         autoClose: 3000,
                         hideProgressBar: false,
@@ -62,8 +62,8 @@ const PortfolioEdit = ({user:userAdmin}) => {
     return (
         <BaseLayout user={user} loading={isLoading}>
             <BasePage
-                header="Portfolio Edit"
-                title={'Edit Portfolio - Tumo Masire'}
+                header="Work Edit"
+                title={'Edit Work - Tumo Masire'}
             >
                 { isLoading &&
                 <div className="text-center">
@@ -73,10 +73,10 @@ const PortfolioEdit = ({user:userAdmin}) => {
                 {
                     <Row>
                         <Col md={"8"} ms={"10"} className="mx-auto">
-                            {portfolio &&
-                            <PortfolioForm
-                                onSubmit={_updatePortfolio}
-                                initialData={portfolio}
+                            {work &&
+                            <WorkForm
+                                onSubmit={_updateWork}
+                                initialData={work}
                                 buttonText={'Update'}
                                 loadingData={loading}
                             />
@@ -93,4 +93,4 @@ const PortfolioEdit = ({user:userAdmin}) => {
 }
 
 // @ts-ignore
-export default withAuth(PortfolioEdit)('admin');
+export default withAuth(WorkEdit)('admin');

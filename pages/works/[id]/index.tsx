@@ -6,45 +6,45 @@ import BasePage from 'components/BasePage'
 import React from "react";
 import { Spinner } from "reactstrap";
 import { useUser } from '@auth0/nextjs-auth0';
-import PortfolioApi from 'lib/api/portfolios';
+import WorkApi from 'lib/api/works';
 import MyLoading from "components/shared/MyLoading";
 import moment from "moment"
 
-interface Portfolio {
+interface Work {
   body: string;
   id: number;
   title: string;
   userId: number;
 }
 
-const PortfolioDetail = ({ portfolio }):JSX.Element => {
+const WorkDetail = ({ work }):JSX.Element => {
   const { user, error, isLoading } = useUser();
 
 
   return (
     <BaseLayout navClass="transparent" user={user} loading={isLoading}>
       <BasePage
-        // header="Portfolio Detail"
+        // header="Work Detail"
         noWrapper
         indexPage
-        title={`${portfolio? portfolio.title : "Portfolio"} - Tumo Masire`}
-        metaDescription={"Information about a portfolio job position held by Tumo Masire - "+portfolio.description.substr(0,150)}
+        title={`${work? work.title : "Work"} - Tumo Masire`}
+        metaDescription={"Information about a work job position held by Tumo Masire - "+work.description.substr(0,150)}
       >
         { isLoading &&
         <div className="text-center">
             <MyLoading size='3.5rem'/>
         </div>
         }
-        {portfolio && !isLoading &&
-        <div className="portfolio-detail">
+        {work && !isLoading &&
+        <div className="work-detail">
             <div className="cover-container d-flex h-100 p-3 mx-auto flex-column">
                 <main role="main" className="inner page-cover">
-                    <h1 className="cover-heading">{portfolio.title}</h1>
-                    <p className="lead dates">{moment(portfolio.startDate).format('MMMM, YYYY')} - {portfolio.endDate ? moment(portfolio.endDate).format('MMMM, YYYY') : "Current"}</p>
-                    <p className="lead info mb-0">{portfolio.jobTitle} | {portfolio.company} | {portfolio.location}</p>
-                    <p className="lead">{portfolio.description}</p>
+                    <h1 className="cover-heading">{work.title}</h1>
+                    <p className="lead dates">{moment(work.startDate).format('MMMM, YYYY')} - {work.endDate ? moment(work.endDate).format('MMMM, YYYY') : "Current"}</p>
+                    <p className="lead info mb-0">{work.jobTitle} | {work.company} | {work.location}</p>
+                    <p className="lead">{work.description}</p>
                     <p className="lead">
-                      {portfolio && portfolio.companyWebsite && <a target="_" href={portfolio.companyWebsite} className="btn btn-lg btn-secondary">Visit Company</a>}
+                      {work && work.companyWebsite && <a target="_" href={work.companyWebsite} className="btn btn-lg btn-secondary">Visit Company</a>}
                     </p>
                 </main>
             </div>
@@ -59,11 +59,11 @@ const PortfolioDetail = ({ portfolio }):JSX.Element => {
 }
 
 export async function getStaticPaths() {
-  const json = await new PortfolioApi().getAll();
-  const portfolios = json.data;
-  const paths = portfolios.map(portfolio => {
+  const json = await new WorkApi().getAll();
+  const works = json.data;
+  const paths = works.map(work => {
     return {
-      params: {id: portfolio._id}
+      params: {id: work._id}
     }
   })
 
@@ -71,10 +71,10 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({params}) {
-  const json = await new PortfolioApi().getById(params.id);
-  const portfolio = json.data;
-  return { props: {portfolio}, revalidate: 1
+  const json = await new WorkApi().getById(params.id);
+  const work = json.data;
+  return { props: {work}, revalidate: 1
   };
 }
 
-export default PortfolioDetail
+export default WorkDetail

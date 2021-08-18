@@ -20,7 +20,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\pages\\portfolios\\[id].tsx",
+            "program": "${workspaceFolder}\\pages\\works\\[id].tsx",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]

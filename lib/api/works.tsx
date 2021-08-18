@@ -1,7 +1,7 @@
 
 import axios from "axios";
 
-class PortfolioApi {
+class WorkApi {
     private _apiUrl: string;
     private _config?: {headers?:object};
 
@@ -18,8 +18,8 @@ class PortfolioApi {
 
         }
 
-        // this.apiUrl = process.env.API_URL + '/portfolios';
-        this._apiUrl = process.env.API_URL + '/portfolios';
+        // this.apiUrl = process.env.API_URL + '/works';
+        this._apiUrl = process.env.API_URL + '/works';
     }
 
 
@@ -50,4 +50,4 @@ class PortfolioApi {
 
 }
 
-export default PortfolioApi;
+export default WorkApi;
