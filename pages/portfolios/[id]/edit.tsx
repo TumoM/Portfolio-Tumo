@@ -7,32 +7,32 @@ import React from "react";
 import MyLoading from "components/shared/MyLoading";
 import {useUser} from "@auth0/nextjs-auth0";
 import withAuth from "hoc/withAuth";
-import {useGetProject, useUpdateProject} from "helpers/projects"
-import ProjectForm from "components/ProjectForm";
+import {useGetPortfolio, useUpdatePortfolio} from "helpers/projects"
+import PortfolioForm from "components/PortfolioForm";
 import { toast } from 'react-toastify';
-interface Project {
+interface Portfolio {
     body: string;
     id: number;
     title: string;
     userId: number;
 }
 
-const ProjectEdit = ({user:userAdmin}) => {
+const PortfolioEdit = ({user:userAdmin}) => {
     const { user:userAuthO, error, isLoading } = useUser();
     const router = useRouter();
-    const project = useGetProject(router.query.id)
+    const portfolio = useGetPortfolio(router.query.id)
     // @ts-ignore
-    const [ updateProject, {error:updateError, loading}] = useUpdateProject();
+    const [ updatePortfolio, {error:updateError, loading}] = useUpdatePortfolio();
     let user = userAuthO || userAdmin;
 
-    const _updateProject = async (data) => {
-        console.log("In _updateproject")
+    const _updatePortfolio = async (data) => {
+        console.log("In _updateportfolio")
         try{
             // @ts-ignore
-            updateProject(router.query.id, data)
+            updatePortfolio(router.query.id, data)
                 .then(r => {
                     console.log("R:",r)
-                    toast.success(`Project Updated`, {
+                    toast.success(`Portfolio Updated`, {
                         position: "bottom-center",
                         autoClose: 3000,
                         hideProgressBar: false,
@@ -62,8 +62,8 @@ const ProjectEdit = ({user:userAdmin}) => {
     return (
         <BaseLayout user={user} loading={isLoading}>
             <BasePage
-                header="Project Edit"
-                title={'Edit Project - Tumo Masire'}
+                header="Portfolio Edit"
+                title={'Edit Portfolio - Tumo Masire'}
             >
                 { isLoading &&
                 <div className="text-center">
@@ -73,10 +73,10 @@ const ProjectEdit = ({user:userAdmin}) => {
                 {
                     <Row>
                         <Col md={"8"} ms={"10"} className="mx-auto">
-                            {project &&
-                            <ProjectForm
-                                onSubmit={_updateProject}
-                                initialData={project}
+                            {portfolio &&
+                            <PortfolioForm
+                                onSubmit={_updatePortfolio}
+                                initialData={portfolio}
                                 buttonText={'Update'}
                                 loadingData={loading}
                             />
@@ -93,4 +93,4 @@ const ProjectEdit = ({user:userAdmin}) => {
 }
 
 // @ts-ignore
-export default withAuth(ProjectEdit)('admin');
+export default withAuth(PortfolioEdit)('admin');

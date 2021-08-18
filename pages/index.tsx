@@ -83,7 +83,7 @@ const Index = () => {
                 <div className="hero-welcome-text">
                   <h1>
                     Welcome to the work website of Tumo Masire.
-                    Get informed, collaborate and discover projects I have worked on on through the years!
+                    Get informed, collaborate and discover portfolios I have worked on on through the years!
                   </h1>
                 </div>
                 <Typed

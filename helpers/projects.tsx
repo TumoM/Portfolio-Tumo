@@ -3,11 +3,11 @@ import { useApiHandler } from 'helpers'
 import useSWR from 'swr';
 import { myFetcher } from "helpers"
 
-export interface IProject {
+export interface IPortfolio {
   title: string,
   thumbnail: string,
   description: string,
-  projectLink: string,
+  portfolioLink: string,
   tags: string,
   images: any,
   startDate:  Date|string,
@@ -15,43 +15,43 @@ export interface IProject {
   disableEndDate?: boolean
 }
 
-export function createProject(data:IProject) {
+export function createPortfolio(data:IPortfolio) {
   try {
-    const res = axios.post('/api/v1/projects', data);
-    console.log("Made createProject Post call");
+    const res = axios.post('/api/v1/portfolios', data);
+    console.log("Made createPortfolio Post call");
     console.log("RES:", res);
     return res
   } catch (err) {
-    console.log("Error creating project", err);
+    console.log("Error creating portfolio", err);
     
     return err;
   }
 }
 
-export function updateProject(id:string|number,data:IProject) {
-  const res = axios.patch(`/api/v1/projects/${id}`, data);
-  console.log("Made updateProject Patch call");
+export function updatePortfolio(id:string|number,data:IPortfolio) {
+  const res = axios.patch(`/api/v1/portfolios/${id}`, data);
+  console.log("Made updatePortfolio Patch call");
   return res
 }
 
-export function deleteProject(id:string|number) {
-  const res = axios.delete(`/api/v1/projects/${id}`);
-  console.log("Made deleteProject Delete call");
+export function deletePortfolio(id:string|number) {
+  const res = axios.delete(`/api/v1/portfolios/${id}`);
+  console.log("Made deletePortfolio Delete call");
   return res
 }
 
-export function useCreateProject() {
-  return useApiHandler(createProject);
+export function useCreatePortfolio() {
+  return useApiHandler(createPortfolio);
 }
 
-export function useUpdateProject() {
-  return useApiHandler(updateProject);
+export function useUpdatePortfolio() {
+  return useApiHandler(updatePortfolio);
 }
-export function useDeleteProject() {
-  return useApiHandler(deleteProject);
+export function useDeletePortfolio() {
+  return useApiHandler(deletePortfolio);
 }
 
-export const useGetProject = (id) => {
-  const { data, error, ...rest}  = useSWR(id ? `/api/v1/projects/${id}`: null, myFetcher)
+export const useGetPortfolio = (id) => {
+  const { data, error, ...rest}  = useSWR(id ? `/api/v1/portfolios/${id}`: null, myFetcher)
   return { data, error, loading: !data && !error, ...rest}
 }

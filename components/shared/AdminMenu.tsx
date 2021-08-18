@@ -25,8 +25,8 @@ const AdminMenu = ({name}:{name:string}) => {
         <DropdownItem>
           <BsNavLink
             className="port-dropdown-item"
-            href="/project/new"
-            title="Create Project"
+            href="/portfolio/new"
+            title="Create Portfolio"
           />
         </DropdownItem>
         <DropdownItem>

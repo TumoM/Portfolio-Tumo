@@ -15,22 +15,22 @@ import Chip from '@material-ui/core/Chip';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 const descriptionLength = 150;
-// const ProjectCard2 = ({project, children}) =>
-//   <Card className="project-card">
-//     <CardHeader className="project-card-header">{project.jobTitle}</CardHeader>
+// const PortfolioCard2 = ({portfolio, children}) =>
+//   <Card className="portfolio-card">
+//     <CardHeader className="portfolio-card-header">{portfolio.jobTitle}</CardHeader>
 //     <CardBody>
-//       <p className="project-card-city">{project.location}</p>
-//       <p className="project-card-dates">{moment(project.startDate).format('MMM, YYYY')} - {project.endDate ? moment(project.endDate).format('MMM, YYYY') : "Current"}</p>
-//       <CardTitle className="project-card-title">{project.title}</CardTitle>
-//       <CardText className="project-card-text">{
-//         project.description.substring(0, descriptionLength) + (project.description.length > descriptionLength ? '...' : '')
+//       <p className="portfolio-card-city">{portfolio.location}</p>
+//       <p className="portfolio-card-dates">{moment(portfolio.startDate).format('MMM, YYYY')} - {portfolio.endDate ? moment(portfolio.endDate).format('MMM, YYYY') : "Current"}</p>
+//       <CardTitle className="portfolio-card-title">{portfolio.title}</CardTitle>
+//       <CardText className="portfolio-card-text">{
+//         portfolio.description.substring(0, descriptionLength) + (portfolio.description.length > descriptionLength ? '...' : '')
 //       }</CardText>
 //       {children}
 //     </CardBody>
 //   </Card>
 const imageOptions = {
   height:345,
-  alt: 'Project Thumbnail',
+  alt: 'Portfolio Thumbnail',
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -52,12 +52,12 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const ProjectCard = ({project, children}) => {
+const PortfolioCard = ({portfolio, children}) => {
   const classes = useStyles();
-  console.log("TAGS:",project.tags);
+  console.log("TAGS:",portfolio.tags);
   const placeholderRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState<boolean>(false);
-  const [chipData, setChipData] = useState(project?.tags)
+  const [chipData, setChipData] = useState(portfolio?.tags)
 
   useEffect(() => {
     if (!visible && placeholderRef.current) {
@@ -72,23 +72,23 @@ const ProjectCard = ({project, children}) => {
   }, [visible, placeholderRef]);
 
   return (
-    <Card className={classes.root+ ' mx-auto project-card'}>
+    <Card className={classes.root+ ' mx-auto portfolio-card'}>
       <CardActionArea>
       {visible
       ? <CardMedia
           className={classes.media}
-          image={project.thumbnail}
-          title="Project Thumbnail"
+          image={portfolio.thumbnail}
+          title="Portfolio Thumbnail"
         /> : 
         <div className={classes.box}style={{height: imageOptions.height, backgroundColor: '#e2e2e2', display: 'flex'}} aria-label={imageOptions.alt} ref={placeholderRef}>
           <CircularProgress color="primary" />
         </div>}
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-          {project.title}
+          {portfolio.title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {project.description.substring(0, descriptionLength) + (project.description.length > descriptionLength ? '...' : '')}
+            {portfolio.description.substring(0, descriptionLength) + (portfolio.description.length > descriptionLength ? '...' : '')}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -117,5 +117,5 @@ const ProjectCard = ({project, children}) => {
   );
 }
 
-export default ProjectCard;
+export default PortfolioCard;
 

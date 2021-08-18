@@ -6,11 +6,11 @@ import Link from "next/link";
 import BasePage from 'components/BasePage';
 import {Button, ButtonGroup, Col, Row, Spinner} from 'reactstrap';
 import { useUser } from '@auth0/nextjs-auth0';
-import ProjectApi from 'lib/api/projects';
-import ProjectCard from "components/ProjectCard";
+import PortfolioApi from 'lib/api/portfolios';
+import PortfolioCard from "components/PortfolioCard";
 import MyLoading from 'components/shared/MyLoading';
 import { isAuthorized } from 'utils/auth0';
-import { useDeleteProject } from 'helpers/projects';
+import { useDeletePortfolio } from 'helpers/projects';
 import {toast} from "react-toastify";
 
 interface Props {
@@ -19,27 +19,27 @@ interface Props {
 
 
 
-const Projects = ({projects:initialProjects}) =>  {
+const Portfolios = ({portfolios:initialPortfolios}) =>  {
   const { user, error, isLoading } = useUser();
   const router = useRouter()
-  const [projects, setProjects] = useState(initialProjects)
+  const [portfolios, setPortfolios] = useState(initialPortfolios)
   // @ts-ignore
-  const [ deleteProject, {data, error:deleteError, laoding} ] = useDeleteProject()
+  const [ deletePortfolio, {data, error:deleteError, laoding} ] = useDeletePortfolio()
 
-  const _deleteProject = (e, id) => {
+  const _deletePortfolio = (e, id) => {
     e.stopPropagation
     const isConfirm = confirm("Are you sure you want to delete?")
     if (isConfirm === true){
       // @ts-ignore
-      deleteProject(id)
+      deletePortfolio(id)
         .then(r => {
-          const tempProjects = projects.filter((project => {
-            if (project._id !== id) {
+          const tempPortfolios = portfolios.filter((portfolio => {
+            if (portfolio._id !== id) {
               return true;
             }
             return false
           }))
-          setProjects(tempProjects)
+          setPortfolios(tempPortfolios)
           toast.success('Delete Successful', {
             position: "bottom-center",
             autoClose: 3000,
@@ -64,15 +64,15 @@ const Projects = ({projects:initialProjects}) =>  {
     }
   }
 
-  const renderProjects = (projects) => {
-    if (projects){
-      return projects.map((project:any) => {
+  const renderPortfolios = (portfolios) => {
+    if (portfolios){
+      return portfolios.map((portfolio:any) => {
         return (
           <Col onClick={() => {
-              router.push(`/projects/[id]`,`/projects/${project?._id}`)
+              router.push(`/portfolios/[id]`,`/portfolios/${portfolio?._id}`)
             }}
-            key={project?._id} ms="4" md="4">
-            <ProjectCard  project={project}>
+            key={portfolio?._id} ms="4" md="4">
+            <PortfolioCard  portfolio={portfolio}>
               { user && isAuthorized(user,'admin') &&
                 <>
                   <Button
@@ -80,7 +80,7 @@ const Projects = ({projects:initialProjects}) =>  {
                     className={'mr-3'}
                     onClick={(e) => {
                       e.stopPropagation();
-                      router.push(`/projects/[id]/edit`,`/projects/${project?._id}/edit`)
+                      router.push(`/portfolios/[id]/edit`,`/portfolios/${portfolio?._id}/edit`)
                     }}
                   >
                     Edit
@@ -90,14 +90,14 @@ const Projects = ({projects:initialProjects}) =>  {
                     color={'danger'}
                     onClick={e => {
                       e.stopPropagation();
-                      _deleteProject(e, project._id)
+                      _deletePortfolio(e, portfolio._id)
                     }}
                   >
                     Delete
                   </Button>
                 </>
               }
-            </ProjectCard>
+            </PortfolioCard>
           </Col>
 
         )
@@ -112,10 +112,10 @@ const Projects = ({projects:initialProjects}) =>  {
       loading={isLoading}
     >
       <BasePage
-        title="Newest Projects - Tumo Masire"
-        header="Projects"
-        className="project-page d-flex align-items-start"
-        metaDescription={"Overview of project job position's held by Tumo Masire"}
+        title="Newest Portfolios - Tumo Masire"
+        header="Portfolios"
+        className="portfolio-page d-flex align-items-start"
+        metaDescription={"Overview of portfolio job position's held by Tumo Masire"}
       >
 
         { isLoading &&
@@ -123,10 +123,10 @@ const Projects = ({projects:initialProjects}) =>  {
             <MyLoading size='3.5rem'/>
           </div>
         }
-        {projects &&
+        {portfolios &&
           <Row>
             {
-              renderProjects(projects)
+              renderPortfolios(portfolios)
             }
           </Row>
 
@@ -139,16 +139,16 @@ const Projects = ({projects:initialProjects}) =>  {
   )
 }
 
-// Get projects data at build time
+// Get portfolios data at build time
 export async function getStaticProps() {
-  console.log("Calling GetAll Project");
-  const json = await new ProjectApi().getAll();
-  console.log("Called GetAll Project");
-  const projects = json.data;
+  console.log("Calling GetAll Portfolio");
+  const json = await new PortfolioApi().getAll();
+  console.log("Called GetAll Portfolio");
+  const portfolios = json.data;
   return {
-    props: { projects: projects},
+    props: { portfolios: portfolios},
     revalidate: 1
   }
 }
 
-export default Projects
+export default Portfolios

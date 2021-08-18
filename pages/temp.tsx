@@ -2,7 +2,7 @@ import BaseLayout from 'components/layouts/BaseLayout'
 import React from "react"
 import BasePage from 'components/BasePage'
 import { useUser } from '@auth0/nextjs-auth0';
-import ProjectForm from 'components/ProjectForm'
+import PortfolioForm from 'components/PortfolioForm'
 
 const Blogs = () =>  {
   const { user, error, isLoading } = useUser();
@@ -17,7 +17,7 @@ const Blogs = () =>  {
     <BaseLayout user={user} loading={isLoading}>
       <BasePage >
         <h1 >I am Temp page</h1>
-        <ProjectForm onSubmit={handleSubmit}/>
+        <PortfolioForm onSubmit={handleSubmit}/>
       </BasePage>
     </BaseLayout>
   )

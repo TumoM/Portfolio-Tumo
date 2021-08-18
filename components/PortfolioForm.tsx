@@ -3,10 +3,10 @@ import {Button, Form, FormGroup, Input, Label, Spinner} from "reactstrap";
 import DatePicker from "react-datepicker";
 import { useForm, Controller } from "react-hook-form"
 import axios from "axios";
-// import {IProject} from "../helpers/Projects";
+// import {IPortfolio} from "../helpers/Portfolios";
 
 interface IInitialData {
-    // data: {IProject}|IProject
+    // data: {IPortfolio}|IPortfolio
 }
 
 interface IProps {
@@ -15,7 +15,7 @@ interface IProps {
     buttonText?: string,
     initialData?: any,
 }
-const ProjectForm = ({onSubmit, loadingData=false,buttonText="Create", initialData = null}:IProps) => {
+const PortfolioForm = ({onSubmit, loadingData=false,buttonText="Create", initialData = null}:IProps) => {
     // const { width } = useWindowDimensions(); // Causing an error?
     // const { register, handleSubmit, setValue, reset } = useForm({defaultValues:initialData.data});
     const { register, handleSubmit, setValue } = useForm({defaultValues: initialData?.data});
@@ -94,7 +94,7 @@ const ProjectForm = ({onSubmit, loadingData=false,buttonText="Create", initialDa
                 type="text"
                 defaultValue={initialData?.data?.title}
 
-                placeholder="My Project Title"
+                placeholder="My Portfolio Title"
                 {...register("title")}
                 id="title"/>
             </FormGroup>
@@ -118,7 +118,7 @@ const ProjectForm = ({onSubmit, loadingData=false,buttonText="Create", initialDa
                 rows="5"
                 type="textarea"
                 defaultValue={ initialData?.data?.description }
-                placeholder="This project is about XYZ..."
+                placeholder="This portfolio is about XYZ..."
                 {...register("description")}
 
                 id="description">
@@ -131,7 +131,7 @@ const ProjectForm = ({onSubmit, loadingData=false,buttonText="Create", initialDa
                 rows="5"
                 type="textarea"
                 defaultValue={ initialData?.data?.technologies.join('\n') }
-                placeholder="This project is about XYZ..."
+                placeholder="This portfolio is about XYZ..."
                 {...register("technologies")}
 
                 id="technologies">
@@ -139,15 +139,15 @@ const ProjectForm = ({onSubmit, loadingData=false,buttonText="Create", initialDa
             </FormGroup>
 
             <FormGroup>
-                <Label htmlFor="projectLink">Project Link</Label>
+                <Label htmlFor="portfolioLink">Portfolio Link</Label>
                 <Input
-                name="projectLink"
+                name="portfolioLink"
                 type="text"
-                defaultValue={ initialData?.data?.projectLink }
+                defaultValue={ initialData?.data?.portfolioLink }
                 placeholder="https://example.com"
-                {...register("projectLink")}
+                {...register("portfolioLink")}
 
-                id="projectLink"/>
+                id="portfolioLink"/>
             </FormGroup>
 
             <FormGroup>
@@ -272,7 +272,7 @@ function useWindowDimensions() {
     return windowDimensions;
   }
 
-export default ProjectForm;
+export default PortfolioForm;
 
 
 

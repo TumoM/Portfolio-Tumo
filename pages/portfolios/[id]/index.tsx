@@ -6,14 +6,14 @@ import BasePage from 'components/BasePage'
 import React from "react";
 import { Spinner } from "reactstrap";
 import { useUser } from '@auth0/nextjs-auth0';
-import ProjectApi from 'lib/api/projects';
+import PortfolioApi from 'lib/api/portfolios';
 import MyLoading from "components/shared/MyLoading";
 import moment from "moment";
 import Image from 'next/image'
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
-interface Project {
+interface Portfolio {
   body: string;
   id: number;
   title: string;
@@ -22,25 +22,25 @@ interface Project {
 
 
 
-const ProjectDetail = ({ project }):JSX.Element => {
+const PortfolioDetail = ({ portfolio }):JSX.Element => {
   const { user, error, isLoading } = useUser();
   
   return (
     <BaseLayout navClass="transparent" linkColor='black' user={user} loading={isLoading}>
       <BasePage
-        // header="Project Detail"
+        // header="Portfolio Detail"
         noWrapper
         indexPage
-        title={`${project? project.title : "Project"} - Tumo Masire`}
-        metaDescription={"Information about a project worked on by Tumo Masire - "+project.description.substr(0,150)}
+        title={`${portfolio? portfolio.title : "Portfolio"} - Tumo Masire`}
+        metaDescription={"Information about a portfolio worked on by Tumo Masire - "+portfolio.description.substr(0,150)}
       >
         { isLoading &&
         <div className="text-center">
             <MyLoading size='3.5rem'/>
         </div>
         }
-        {project && !isLoading &&
-        <div className="project-detail">
+        {portfolio && !isLoading &&
+        <div className="portfolio-detail">
             <div className="cover-container d-flex h-100 p-3 mx-auto flex-column">
                 <main role="main" className="inner page-cover">
                   <Grid 
@@ -50,21 +50,21 @@ const ProjectDetail = ({ project }):JSX.Element => {
                     justifyContent="flex-start"
                     alignItems="flex-start">
                     <Grid item xs={10} className={'mb-4'}>
-                      <Image layout={'intrinsic'} src={project.thumbnail} alt='Project Thumbnail' height={337.5} width={600} />
+                      <Image layout={'intrinsic'} src={portfolio.thumbnail} alt='Portfolio Thumbnail' height={337.5} width={600} />
                     </Grid>
                     <Grid item xs={12}>
                       <Typography className={'mb-0'} style={{ fontWeight: 'bold' }} variant="h4" component="h2">
-                        {project.title}
+                        {portfolio.title}
                       </Typography>
                     </Grid>
                     <Grid item xs={12}>
                       <Typography className={'mb-3'}  variant="subtitle1" gutterBottom>
-                        {moment(project.startDate).format('MMMM, YYYY')} 
+                        {moment(portfolio.startDate).format('MMMM, YYYY')} 
                       </Typography>
                     </Grid>
                     <Grid className={'mb-4'} item xs={12}>
                       <Typography variant="body1" style={{whiteSpace: 'pre-line'}} gutterBottom>
-                      {project.description}
+                      {portfolio.description}
                       </Typography>
                     </Grid>
                     <Grid className={'mb-2'} item xs={12}>
@@ -72,20 +72,20 @@ const ProjectDetail = ({ project }):JSX.Element => {
                         Technologies:
                       </Typography>
                       <ul>
-                        {project.technologies.map((tech,i)=> <li style={{fontSize: "1.15rem"}} key={i}>{tech}</li>)}
+                        {portfolio.technologies.map((tech,i)=> <li style={{fontSize: "1.15rem"}} key={i}>{tech}</li>)}
                       </ul>
                     </Grid>
                     <Grid className={'mb-4'} item xs={12}>
                       <Typography className={'mb-2'} style={{ fontWeight: 'bold' }} variant="h5" component="h3">
                         Screenshots:
                       </Typography>
-                        {project.images.map((image,i)=> {
+                        {portfolio.images.map((image,i)=> {
                           return (
                             <div className={'mb-5'} key={i}>
                               <Typography className={'mb-2'} style={{ fontWeight: 'bold' }} variant="subtitle1" gutterBottom >
                                 {image.caption}
                               </Typography>
-                              <Image layout={'intrinsic'} src={project.thumbnail} alt='Project Thumbnail' height={337.5} width={600} />
+                              <Image layout={'intrinsic'} src={portfolio.thumbnail} alt='Portfolio Thumbnail' height={337.5} width={600} />
                             </div>)
                         })}
                     </Grid>
@@ -103,11 +103,11 @@ const ProjectDetail = ({ project }):JSX.Element => {
 }
 
 export async function getStaticPaths() {
-  const json = await new ProjectApi().getAll();
-  const projects = json.data;
-  const paths = projects.map(project => {
+  const json = await new PortfolioApi().getAll();
+  const portfolios = json.data;
+  const paths = portfolios.map(portfolio => {
     return {
-      params: {id: project._id}
+      params: {id: portfolio._id}
     }
   })
 
@@ -115,10 +115,10 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({params}) {
-  const json = await new ProjectApi().getById(params.id);
-  const project = json.data;
-  return { props: {project}, revalidate: 1
+  const json = await new PortfolioApi().getById(params.id);
+  const portfolio = json.data;
+  return { props: {portfolio}, revalidate: 1
   };
 }
 
-export default ProjectDetail
+export default PortfolioDetail
