@@ -11,7 +11,7 @@ import { Row, Col } from 'reactstrap';
 import axios from 'axios';
 import PortfolioApi from 'lib/api/portfolios'
 import { getAccessToken } from '@auth0/nextjs-auth0';
-import { useCreatePortfolio } from 'helpers/projects';
+import { useCreatePortfolio } from 'helpers/portfolios';
 import Redirect from 'components/shared/redirect';
 
 const PortfolioNew = ({user, loading:loadingProp}) =>  {

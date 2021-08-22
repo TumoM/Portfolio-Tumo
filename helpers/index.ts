@@ -23,7 +23,7 @@ export function useApiHandler(apiCallback) {
     loading:false
   });
 
-  const handler = async (...data) => {
+  const handler = async (...data: any[]) => {
     setRequestState({error: null, data: null, loading: true})
     try {
       const json = await apiCallback(...data);

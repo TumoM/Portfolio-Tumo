@@ -7,7 +7,7 @@ import React from "react";
 import MyLoading from "components/shared/MyLoading";
 import {useUser} from "@auth0/nextjs-auth0";
 import withAuth from "hoc/withAuth";
-import {useGetPortfolio, useUpdatePortfolio} from "helpers/projects"
+import {useGetPortfolio, useUpdatePortfolio} from "helpers/portfolios"
 import PortfolioForm from "components/PortfolioForm";
 import { toast } from 'react-toastify';
 interface Portfolio {

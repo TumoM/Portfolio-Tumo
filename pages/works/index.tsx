@@ -24,7 +24,7 @@ const Works = ({works:initialWorks}) =>  {
   const router = useRouter()
   const [works, setWorks] = useState(initialWorks)
   // @ts-ignore
-  const [ deleteWork, {data, error:deleteError, laoding} ] = useDeleteWork()
+  const [ deleteWork, {data, error:deleteError, loading} ] = useDeleteWork()
 
   const _deleteWork = (e, id) => {
     e.stopPropagation

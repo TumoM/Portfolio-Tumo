@@ -10,7 +10,7 @@ import PortfolioApi from 'lib/api/portfolios';
 import PortfolioCard from "components/PortfolioCard";
 import MyLoading from 'components/shared/MyLoading';
 import { isAuthorized } from 'utils/auth0';
-import { useDeletePortfolio } from 'helpers/projects';
+import { useDeletePortfolio } from 'helpers/portfolios';
 import {toast} from "react-toastify";
 
 interface Props {
@@ -41,7 +41,7 @@ const Portfolios = ({portfolios:initialPortfolios}) =>  {
     }))
   }, [portfolios])
 
-  const [ deletePortfolio, {data, error:deleteError, laoding} ] = useDeletePortfolio()
+  const [ deletePortfolio ] = useDeletePortfolio()
 
   const _deletePortfolio = (e, id) => {
     e.stopPropagation
