@@ -23,7 +23,24 @@ const Portfolios = ({portfolios:initialPortfolios}) =>  {
   const { user, error, isLoading } = useUser();
   const router = useRouter()
   const [portfolios, setPortfolios] = useState(initialPortfolios)
-  // @ts-ignore
+  
+  useEffect(() => {
+    setPortfolios(portfolios.sort(function compare(a, b) {
+      var dateA = new Date(a.startDate) as any;
+      var dateB = new Date(b.startDate) as any;
+      if (!a.endDate && !b.endDate){
+        return (dateB - dateA)
+      }
+      else if (!a.endDate && b.endDate) {
+        return 1
+      }
+      else if (a.endDate && !b.endDate) {
+        return -1
+      }
+      return (dateB - dateA);
+    }))
+  }, [portfolios])
+
   const [ deletePortfolio, {data, error:deleteError, laoding} ] = useDeletePortfolio()
 
   const _deletePortfolio = (e, id) => {

@@ -65,6 +65,7 @@ const Works = ({works:initialWorks}) =>  {
   }
 
   const renderWorks = (works) => {
+    
     if (works){
       return works.map((work:any) => {
         return (
@@ -152,3 +153,4 @@ export async function getStaticProps() {
 }
 
 export default Works
+
